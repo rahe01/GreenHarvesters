@@ -8,11 +8,15 @@ import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
 import { HelmetProvider } from 'react-helmet-async'
 
+import { ThemeProvider } from "@material-tailwind/react";
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <HelmetProvider>
-    <AuthProvider>
+   <ThemeProvider>
+   <AuthProvider>
       <RouterProvider router={router} />
       <Toaster />
     </AuthProvider>
+   </ThemeProvider>
   </HelmetProvider>
 )

@@ -3,7 +3,7 @@ import { FcGoogle } from 'react-icons/fc'
 
 const Login = () => {
   return (
-    <div className='flex justify-center items-center min-h-screen'>
+    <div className="flex justify-center items-center min-h-screen  bg-[url('https://i.ibb.co/tBzy7LF/pexels-timmossholder-974314.jpg')]  bg-cover bg-no-repeat">
       <div className='flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900'>
         <div className='mb-8 text-center'>
           <h1 className='my-3 text-4xl font-bold'>Log In</h1>
