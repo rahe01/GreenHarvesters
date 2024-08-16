@@ -1,5 +1,7 @@
-import PropTypes from 'prop-types'
+
 import { createContext, useEffect, useState } from 'react'
+
+
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
@@ -11,8 +13,12 @@ import {
   signOut,
   updateProfile,
 } from 'firebase/auth'
-import { app } from '../firebase/firebase.config'
+
+
+
 import axios from 'axios'
+import { app } from '../firebase/firebase.config'
+
 export const AuthContext = createContext(null)
 const auth = getAuth(app)
 const googleProvider = new GoogleAuthProvider()
@@ -65,12 +71,32 @@ const AuthProvider = ({ children }) => {
     return data
   }
 
+  // save user in db
+
+  const saveUser = async (user) => {
+
+    const currentUser = {
+      email: user?.email,
+      name: user?.displayName,
+      photo: user?.photoURL,
+      role: 'Farmer',
+      status: 'Verified'
+    }
+
+
+
+    const {data} = await axios.put(`${import.meta.env.VITE_API_URL}/user` , currentUser )
+    return data;
+  }
+  console.log(user?.displayName, user?.photoURL)
+
   // onAuthStateChange
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
       setUser(currentUser)
       if (currentUser) {
         getToken(currentUser.email)
+        saveUser(currentUser)
       }
       setLoading(false)
     })
@@ -96,9 +122,5 @@ const AuthProvider = ({ children }) => {
   )
 }
 
-AuthProvider.propTypes = {
-  // Array of children.
-  children: PropTypes.array,
-}
 
 export default AuthProvider

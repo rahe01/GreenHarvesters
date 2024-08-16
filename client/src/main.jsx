@@ -10,6 +10,7 @@ import { HelmetProvider } from 'react-helmet-async'
 
 import { ThemeProvider } from "@material-tailwind/react";
 
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <HelmetProvider>
    <ThemeProvider>
