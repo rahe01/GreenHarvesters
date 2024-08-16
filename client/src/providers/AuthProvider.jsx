@@ -77,8 +77,6 @@ const AuthProvider = ({ children }) => {
 
     const currentUser = {
       email: user?.email,
-      name: user?.displayName,
-      photo: user?.photoURL,
       role: 'Farmer',
       status: 'Verified'
     }
@@ -88,7 +86,7 @@ const AuthProvider = ({ children }) => {
     const {data} = await axios.put(`${import.meta.env.VITE_API_URL}/user` , currentUser )
     return data;
   }
-  console.log(user?.displayName, user?.photoURL)
+  
 
   // onAuthStateChange
   useEffect(() => {
