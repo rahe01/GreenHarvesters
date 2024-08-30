@@ -3,6 +3,7 @@ import { FcGoogle } from 'react-icons/fc'
 
 import useAuth from '../../hooks/useAuth'
 import toast from 'react-hot-toast'
+import { ImSpinner9 } from 'react-icons/im'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -100,7 +101,7 @@ const Login = () => {
               className='bg-green-400 w-full rounded-md py-3 text-white'
               disabled={loading}
             >
-              {loading ? 'Logging In...' : 'Continue'}
+              {loading ?  <ImSpinner9 className="animate-spin m-auto"></ImSpinner9> : 'Continue'}
             </button>
           </div>
         </form>

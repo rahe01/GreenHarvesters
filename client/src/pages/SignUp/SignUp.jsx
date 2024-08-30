@@ -4,13 +4,14 @@ import { Input } from "@material-tailwind/react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import toast from 'react-hot-toast';
+import { ImSpinner9 } from "react-icons/im";
 
 const SignUp = () => {
   const navigate = useNavigate();
   const {
     updateUserProfile,
     signInWithGoogle,
-    createUser,
+    createUserWithEmailAndPassword,
     loading,
     setLoading,
   } = useAuth();
@@ -50,7 +51,7 @@ const SignUp = () => {
 
       const imageUrl = data?.data?.display_url;
 
-      await createUser(email, password);
+      await createUserWithEmailAndPassword(email, password);
       await updateUserProfile(name, imageUrl);
 
       toast.success('Account created successfully!');
@@ -93,7 +94,7 @@ const SignUp = () => {
                 Select Image:
               </label>
               <input
-                required
+               
                 type="file"
                 id="image"
                 name="image"
@@ -138,7 +139,7 @@ const SignUp = () => {
               className="w-full rounded-md py-3 bg-green-400 text-white"
               disabled={loading}
             >
-              {loading ? "Signing Up..." : "Continue"}
+              {loading ? <ImSpinner9 className="animate-spin m-auto"></ImSpinner9> : "Continue"}
             </button>
           </div>
         </form>
