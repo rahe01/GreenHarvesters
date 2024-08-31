@@ -1,9 +1,16 @@
 import { useState } from "react";
 import Link from "../Link/Link";
+import useAuth from './../../../hooks/useAuth';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 const Nav = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownOpen1, setIsDropdownOpen1] = useState(false);
+  
+  const { user } = useAuth(); // Access user directly
+  const { photoURL, email, displayName } = user || {}; // Ensure user is defined
+
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -12,6 +19,8 @@ const Nav = () => {
   const toggleDropdown1 = () => {
     setIsDropdownOpen1(!isDropdownOpen1);
   };
+
+
 
   return (
     <nav className=" color2b top-0 left-0 w-full bg-transparent bg-blue-gray-600 border-gray-200 dark:bg-gray-900 z-10">
@@ -35,7 +44,7 @@ const Nav = () => {
             <span className="sr-only">Open user menu</span>
             <img
               className="w-8 h-8 rounded-full"
-              src="/docs/images/people/profile-picture-3.jpg"
+              src={photoURL}
               alt="user photo"
             />
           </button>
@@ -49,45 +58,50 @@ const Nav = () => {
           >
             <div className="px-4 py-3">
               <span className="block text-sm text-gray-900 dark:text-white">
-                Bonnie Green
+                {displayName}
               </span>
               <span className="block text-sm text-gray-500 truncate dark:text-gray-400">
-                name@flowbite.com
+               {email}
               </span>
             </div>
             <ul className="py-2" aria-labelledby="user-menu-button">
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >
-                  Dashboard
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >
-                  Settings
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >
-                  Earnings
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >
-                  Sign out
-                </a>
-              </li>
+            <li>
+  <a
+    href="#"
+    className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+  >
+    <i className="fas fa-tachometer-alt mr-2"></i>
+    Dashboard
+  </a>
+</li>
+<li>
+  <a
+    href="#"
+    className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+  >
+    <i className="fas fa-cog mr-2"></i>
+    Settings
+  </a>
+</li>
+<li>
+  <a
+    href="#"
+    className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+  >
+    <i className="fas fa-dollar-sign mr-2"></i>
+    Earnings
+  </a>
+</li>
+<li>
+  <a
+    href="#"
+    className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+  >
+    <i className="fas fa-sign-out-alt mr-2"></i>
+    Sign out
+  </a>
+</li>
+
             </ul>
           </div>
         </div>
