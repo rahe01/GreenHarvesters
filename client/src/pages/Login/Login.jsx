@@ -8,7 +8,7 @@ import { ImSpinner9 } from 'react-icons/im'
 const Login = () => {
   const navigate = useNavigate()
   const location = useLocation()
-  const from = location?.state?.from || '/' // Default to '/' if `from` is not set
+  const from = location?.state?.from || '/' 
 
   const { signIn, signInWithGoogle, loading, setLoading } = useAuth()
 
