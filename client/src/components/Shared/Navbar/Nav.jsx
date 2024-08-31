@@ -1,16 +1,19 @@
 import { useState } from "react";
-import Link from "../Link/Link";
-import useAuth from './../../../hooks/useAuth';
-import '@fortawesome/fontawesome-free/css/all.min.css';
+
+import useAuth from "./../../../hooks/useAuth";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import { toast } from "react-hot-toast";
+import { Link } from "react-router-dom";
+import NavLinkk from "../Link/NavLinkk";
+import { FaSignInAlt, FaUserPlus } from 'react-icons/fa';
 
 
 const Nav = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownOpen1, setIsDropdownOpen1] = useState(false);
-  
-  const { user } = useAuth(); // Access user directly
-  const { photoURL, email, displayName } = user || {}; // Ensure user is defined
 
+  const { user, logOut } = useAuth(); // Access user directly
+  const { photoURL, email, displayName } = user || {}; // Ensure user is defined
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -20,10 +23,17 @@ const Nav = () => {
     setIsDropdownOpen1(!isDropdownOpen1);
   };
 
-
+  const handleLogout = async () => {
+    try {
+      logOut();
+      toast.success("Logged Out Successfully");
+    } catch (error) {
+      toast.error("Failed to Logout");
+    }
+  };
 
   return (
-    <nav className=" color2b top-0 left-0 w-full bg-transparent bg-blue-gray-600 border-gray-200 dark:bg-gray-900 z-10">
+    <nav className="color2b top-0 left-0 w-full bg-transparent bg-blue-gray-600 border-gray-200 dark:bg-gray-900 z-10">
       <div className="flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <img
@@ -36,7 +46,7 @@ const Nav = () => {
         <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
           <button
             type="button"
-            className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 ml-20"
+            className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 ml-28"
             id="user-menu-button"
             aria-expanded={isDropdownOpen ? "true" : "false"}
             onClick={toggleDropdown}
@@ -44,7 +54,7 @@ const Nav = () => {
             <span className="sr-only">Open user menu</span>
             <img
               className="w-8 h-8 rounded-full"
-              src={photoURL}
+              src={photoURL || '../../../../public/person.png'}
               alt="user photo"
             />
           </button>
@@ -61,47 +71,68 @@ const Nav = () => {
                 {displayName}
               </span>
               <span className="block text-sm text-gray-500 truncate dark:text-gray-400">
-               {email}
+                {email}
               </span>
             </div>
             <ul className="py-2" aria-labelledby="user-menu-button">
-            <li>
-  <a
-    href="#"
-    className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-  >
-    <i className="fas fa-tachometer-alt mr-2"></i>
-    Dashboard
-  </a>
-</li>
-<li>
-  <a
-    href="#"
-    className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-  >
-    <i className="fas fa-cog mr-2"></i>
-    Settings
-  </a>
-</li>
-<li>
-  <a
-    href="#"
-    className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-  >
-    <i className="fas fa-dollar-sign mr-2"></i>
-    Earnings
-  </a>
-</li>
-<li>
-  <a
-    href="#"
-    className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-  >
-    <i className="fas fa-sign-out-alt mr-2"></i>
-    Sign out
-  </a>
-</li>
+              {user ? (
+                <>
+                  <li>
+                    <a
+                      href="#"
+                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      <i className="fas fa-tachometer-alt mr-2"></i>
+                      Dashboard
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      <i className="fas fa-cog mr-2"></i>
+                      Settings
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      <i className="fas fa-dollar-sign mr-2"></i>
+                      Earnings
+                    </a>
+                  </li>
+                  <li>
+                    <button
+                      onClick={handleLogout}
+                      className="flex items-center px-4 py-2 text-sm w-full text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      <i className="fas fa-sign-out-alt mr-2"></i>
+                      Sign out
+                    </button>
+                  </li>
+                </>
+              ) : (
+                <>
+              <Link 
+  className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" 
+  to={'/login'}
+>
+  <FaSignInAlt className="mr-2" /> {/* FontAwesome icon for Log In */}
+  Log In
+</Link>
 
+<Link 
+  className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" 
+  to={'/signup'}
+>
+  <FaUserPlus className="mr-2" /> {/* FontAwesome icon for Sign Up */}
+  Sign Up
+</Link>
+                </>
+              )}
             </ul>
           </div>
         </div>
@@ -135,25 +166,25 @@ const Nav = () => {
             id="primary"
           >
             <li>
-              <Link title={"Home"} address={"/login"}></Link>
+              <NavLinkk title={"Home"} address={"/login"}></NavLinkk>
             </li>
             <li>
-              <Link title={"About"} address={"/about"}></Link>
+              <NavLinkk title={"About"} address={"/about"}></NavLinkk>
             </li>
             <li>
-              <Link title={"Services"} address={"/services"}></Link>
+              <NavLinkk title={"Services"} address={"/services"}></NavLinkk>
             </li>
             <li>
-              <Link title={"Projects"} address={"/projects"}></Link>
+              <NavLinkk title={"Projects"} address={"/projects"}></NavLinkk>
             </li>
             <li>
-              <Link title={"News"} address={"/news"}></Link>
+              <NavLinkk title={"News"} address={"/news"}></NavLinkk>
             </li>
             <li>
-              <Link title={"Shop"} address={"/shop"}></Link>
+              <NavLinkk title={"Shop"} address={"/shop"}></NavLinkk>
             </li>
             <li>
-              <Link title={"Contact"} address={"/contact"}></Link>
+              <NavLinkk title={"Contact"} address={"/contact"}></NavLinkk>
             </li>
           </ul>
         </div>

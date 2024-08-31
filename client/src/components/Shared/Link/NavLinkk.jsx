@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-const Link = ({title , address}) => {
+const NavLinkk = ({title , address}) => {
     return (
 <NavLink
     to={address}
@@ -14,4 +14,4 @@ const Link = ({title , address}) => {
     );
 };
 
-export default Link;
+export default NavLinkk;
