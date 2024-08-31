@@ -1,9 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+.color1b {
+    background-color: #8AD167;
+}
+.color2b {
+    background-color: #DFDE9F;
+}
+.color1t {
+    color: #8AD167;
+}
+.color2t {
+    color: #DFDE9F;
+}
+
+body {
+    font-family: "Merriweather", serif;
+    position: relative;
+}
+
+/* btn */
+#primary {
+   
+    top: 0;
+    margin: auto;
+    text-align: center;
+ 
+}
 
 
-.color-1st{
-    background-color: #DBD468;
+#primary li a {
+    text-decoration: none;
+    display: block;
+    padding: 5px 0;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1em;
+    line-height: 1;
+    font-weight: bold;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(to right, #8AD167, #8AD167 50%, #fff 50%);
+    background-size: 200% 100%;
+    background-position: -100%;
+    transition: all 0.3s ease-in-out;
+}
+
+#primary li a:before {
+    display: block;
+    content: '';
+    width: 0;
+    height: 3px;
+    bottom: -3px;
+    left: 0;
+    z-index: 0;
+    position: absolute;
+    background: #8AD167;
+    transition: all 0.3s ease-in-out;
+}
+
+#primary li a:hover {
+    background-position: 0%;
+}
+
+#primary li a:hover:before {
+    width: 100%;
 }

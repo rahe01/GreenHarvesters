@@ -6,105 +6,145 @@ const Nav = () => {
   const [isDropdownOpen1, setIsDropdownOpen1] = useState(false);
 
   const toggleDropdown = () => {
-      setIsDropdownOpen(!isDropdownOpen);
+    setIsDropdownOpen(!isDropdownOpen);
   };
 
   const toggleDropdown1 = () => {
-      setIsDropdownOpen1(!isDropdownOpen1);
+    setIsDropdownOpen1(!isDropdownOpen1);
   };
 
-
-
-
-
-
-
-
-
-
-
-
-
   return (
-      <nav className="bg-blue-gray-600 border-gray-200 dark:bg-gray-900">
-          <div className="flex flex-wrap items-center  justify-between mx-auto p-4">
-              <a href="/"
-              
-className="flex items-center space-x-3 rtl:space-x-reverse">
-                  <img src="../../../../public/logo.png" className="h-14" alt="Flowbite Logo" />
-                  <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"></span>
-              </a>
-              <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                  <button
-                      type="button"
-                      className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 ml-20"
-                      id="user-menu-button"
-                      aria-expanded={isDropdownOpen ? "true" : "false"}
-                      onClick={toggleDropdown}
-                  >
-                      <span className="sr-only">Open user menu</span>
-                      <img className="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user photo" />
-                  </button>
+    <nav className=" color2b top-0 left-0 w-full bg-transparent bg-blue-gray-600 border-gray-200 dark:bg-gray-900 z-10">
+      <div className="flex flex-wrap items-center justify-between mx-auto p-4">
+        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+          <img
+            src="../../../../public/logo.png"
+            className="h-14"
+            alt="Flowbite Logo"
+          />
+          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"></span>
+        </a>
+        <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+          <button
+            type="button"
+            className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 ml-20"
+            id="user-menu-button"
+            aria-expanded={isDropdownOpen ? "true" : "false"}
+            onClick={toggleDropdown}
+          >
+            <span className="sr-only">Open user menu</span>
+            <img
+              className="w-8 h-8 rounded-full"
+              src="/docs/images/people/profile-picture-3.jpg"
+              alt="user photo"
+            />
+          </button>
 
-                  {/* Dropdown menu */}
-                  <div
-                      className={`absolute rounded-xl shadow-md w-[40vw] md:w-[10vw] bg-white overflow-hidden right-0 top-12 text-sm ${isDropdownOpen ? 'block' : 'hidden'}`}
-                      id="user-dropdown"
-                  >
-                      <div className="px-4 py-3">
-                          <span className="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
-                          <span className="block text-sm text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
-                      </div>
-                      <ul className="py-2" aria-labelledby="user-menu-button">
-                          <li>
-                              <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
-                          </li>
-                          <li>
-                              <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
-                          </li>
-                          <li>
-                              <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</a>
-                          </li>
-                          <li>
-                              <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
-                          </li>
-                      </ul>
-                  </div>
-              </div>
-              <button
-                  data-collapse-toggle="navbar-user"
-                  type="button"
-                  className="items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg block md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                  aria-controls="navbar-user"
-                  aria-expanded={isDropdownOpen1 ? "true" : "false"}
-                  onClick={toggleDropdown1}
-              >
-                  <span className="sr-only">Open main menu</span>
-                  <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                      <path stroke="currentColor" d="M1 1h15M1 7h15M1 13h15" />
-                  </svg>
-              </button>
-              <div className={`items-center justify-between ${isDropdownOpen1 ? 'block' : 'hidden'} w-full md:flex md:w-auto md:order-1`} id="navbar-user">
-                  <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                      <li>
-                          <Link title={"Homeeee"} address={"/login"}></Link>
-                      </li>
-                      <li>
-                          <a href="#" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
-                      </li>
-                      <li>
-                          <a href="#" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
-                      </li>
-                      <li>
-                          <a href="#" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Pricing</a>
-                      </li>
-                      <li>
-                          <a href="#" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
-                      </li>
-                  </ul>
-              </div>
+          {/* Dropdown menu */}
+          <div
+            className={`absolute z-50 rounded-xl shadow-md w-[40vw] md:w-[10vw] bg-white overflow-hidden right-0 top-12 text-sm ${
+              isDropdownOpen ? "block" : "hidden"
+            }`}
+            id="user-dropdown"
+          >
+            <div className="px-4 py-3">
+              <span className="block text-sm text-gray-900 dark:text-white">
+                Bonnie Green
+              </span>
+              <span className="block text-sm text-gray-500 truncate dark:text-gray-400">
+                name@flowbite.com
+              </span>
+            </div>
+            <ul className="py-2" aria-labelledby="user-menu-button">
+              <li>
+                <a
+                  href="#"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                >
+                  Dashboard
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                >
+                  Settings
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                >
+                  Earnings
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                >
+                  Sign out
+                </a>
+              </li>
+            </ul>
           </div>
-      </nav>
+        </div>
+        <button
+          data-collapse-toggle="navbar-user"
+          type="button"
+          className="items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg block md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+          aria-controls="navbar-user"
+          aria-expanded={isDropdownOpen1 ? "true" : "false"}
+          onClick={toggleDropdown1}
+        >
+          <span className="sr-only">Open main menu</span>
+          <svg
+            className="w-5 h-5"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 17 14"
+          >
+            <path stroke="currentColor" d="M1 1h15M1 7h15M1 13h15" />
+          </svg>
+        </button>
+        <div
+          className={`items-center justify-between ${
+            isDropdownOpen1 ? "block" : "hidden"
+          } w-full md:flex md:w-auto md:order-1`}
+          id="navbar-user"
+        >
+          <ul
+            className="flex flex-col font-medium p-4 md:p-0 mt-4 borderrounded-lg text-white md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 "
+            id="primary"
+          >
+            <li>
+              <Link title={"Home"} address={"/login"}></Link>
+            </li>
+            <li>
+              <Link title={"About"} address={"/about"}></Link>
+            </li>
+            <li>
+              <Link title={"Services"} address={"/services"}></Link>
+            </li>
+            <li>
+              <Link title={"Projects"} address={"/projects"}></Link>
+            </li>
+            <li>
+              <Link title={"News"} address={"/news"}></Link>
+            </li>
+            <li>
+              <Link title={"Shop"} address={"/shop"}></Link>
+            </li>
+            <li>
+              <Link title={"Contact"} address={"/contact"}></Link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
   );
 };
 

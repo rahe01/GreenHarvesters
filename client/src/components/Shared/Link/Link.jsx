@@ -5,7 +5,7 @@ const Link = ({title , address}) => {
 <NavLink
     to={address}
     className={({ isActive }) =>
-        isActive ? "text-blue-500" : "text-gray-500"
+        isActive ? "text-blue-500" : "text-white"
     }
 >
     {title}
