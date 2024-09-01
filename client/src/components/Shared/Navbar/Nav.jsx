@@ -5,8 +5,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import NavLinkk from "../Link/NavLinkk";
-import { FaSignInAlt, FaUserPlus } from 'react-icons/fa';
-
+import { FaSignInAlt, FaUserPlus } from "react-icons/fa";
 
 const Nav = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -46,7 +45,7 @@ const Nav = () => {
         <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
           <button
             type="button"
-            className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 ml-28"
+            className="flex text-sm bg-white rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 ml-28"
             id="user-menu-button"
             aria-expanded={isDropdownOpen ? "true" : "false"}
             onClick={toggleDropdown}
@@ -54,7 +53,7 @@ const Nav = () => {
             <span className="sr-only">Open user menu</span>
             <img
               className="w-8 h-8 rounded-full"
-              src={photoURL || '../../../../public/person.png'}
+              src={photoURL || "../../../../public/person.png"}
               alt="user photo"
             />
           </button>
@@ -116,21 +115,23 @@ const Nav = () => {
                 </>
               ) : (
                 <>
-              <Link 
-  className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" 
-  to={'/login'}
->
-  <FaSignInAlt className="mr-2" /> {/* FontAwesome icon for Log In */}
-  Log In
-</Link>
+                  <Link
+                    className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    to={"/login"}
+                  >
+                    <FaSignInAlt className="mr-2" />{" "}
+                    {/* FontAwesome icon for Log In */}
+                    Log In
+                  </Link>
 
-<Link 
-  className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" 
-  to={'/signup'}
->
-  <FaUserPlus className="mr-2" /> {/* FontAwesome icon for Sign Up */}
-  Sign Up
-</Link>
+                  <Link
+                    className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    to={"/signup"}
+                  >
+                    <FaUserPlus className="mr-2" />{" "}
+                    {/* FontAwesome icon for Sign Up */}
+                    Sign Up
+                  </Link>
                 </>
               )}
             </ul>
