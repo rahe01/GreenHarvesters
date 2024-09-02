@@ -124,15 +124,21 @@ async function run() {
     })
 
     // get offer by id 
-    app.get('/getofferbyid:/id' , async (req, res) => {
-      const id = new ObjectId(req.params.id);
-      try {
-        const offer = await weofferCollection.findOne({ _id: id });
-        res.send(offer);
-      } catch (error) {
-        res.status(500).send({ message: "An error occurred", error });
-      }
-    })
+ // Get offer by ID
+app.get('/getofferbyid/:id', async (req, res) => {
+  const id = new ObjectId(req.params.id); // Convert the ID to an ObjectId
+  try {
+    const offer = await weofferCollection.findOne({ _id: id });
+    if (!offer) {
+      res.status(404).send({ message: "Offer not found" });
+    } else {
+      res.send(offer);
+    }
+  } catch (error) {
+    res.status(500).send({ message: "An error occurred", error });
+  }
+});
+
 
 
 

@@ -30,21 +30,23 @@ const WeOffer = () => {
           {offers.length > 0 ? (
             offers.map((offer) => (
               <Link 
-                to={`/offer/${offer.id}`} 
+                to={`/offer/${offer._id}`} 
                 key={offer.id} 
-                className="relative bg-white p-6 rounded-lg block hover:shadow-lg transition-shadow duration-200"
+                className="relative bg-white p-6 rounded-lg block hover:shadow-lg transition-shadow duration-200 cursor-pointer group"
               >
                 {/* Image container with icon */}
-                <div className="relative w-full h-48 mb-4">
+                <div className="relative w-full h-48 mb-4 aspect-square ">
                   <img
                     src={offer.image}
                     alt={offer.title}
-                    className="w-full h-full object-cover rounded-lg"
+                    className="w-full h-full object-cover rounded-lg  group-hover:scale-90 
+                transition"
                   />
                   <img
                     src={offer.icon}
                     alt={`${offer.title} Icon`}
-                    className="absolute bottom-4 right-4 w-12 h-12"
+                    className="absolute bottom-4 right-4 w-12 h-12  group-hover:scale-90 
+                transition"
                   />
                 </div>
                 <h2 className="text-2xl font-bold mb-2">{offer.title}</h2>
