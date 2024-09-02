@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import LoadingSpinner from '../../../components/Shared/LoadingSpinner';
 
 const WeOffer = () => {
   const [offers, setOffers] = useState([]);
 
   useEffect(() => {
-    fetch('./weoffer.json')
+    const apiUrl = import.meta.env.VITE_API_URL; // Access the API URL from the environment variable
+    const getOfferEndpoint = `${apiUrl}/getoffer`;
+    fetch(getOfferEndpoint)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -26,7 +29,11 @@ const WeOffer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {offers.length > 0 ? (
             offers.map((offer) => (
-              <div key={offer.id} className="relative bg-white p-6 rounded-lg">
+              <Link 
+                to={`/offer/${offer.id}`} 
+                key={offer.id} 
+                className="relative bg-white p-6 rounded-lg block hover:shadow-lg transition-shadow duration-200"
+              >
                 {/* Image container with icon */}
                 <div className="relative w-full h-48 mb-4">
                   <img
@@ -41,9 +48,8 @@ const WeOffer = () => {
                   />
                 </div>
                 <h2 className="text-2xl font-bold mb-2">{offer.title}</h2>
-                <p className=" mb-4">{offer.description}</p>
-                {/* Add more details as needed */}
-              </div>
+                <p className="mb-4">{offer.description}</p>
+              </Link>
             ))
           ) : (
             <LoadingSpinner />

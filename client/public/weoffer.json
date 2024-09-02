@@ -1,10 +1,10 @@
 
    [  {
-        "id": 1,
+      
         "title": "Agriculture Products",
         "description": "Our Agriculture Products category offers a wide range of high-quality seeds, fertilizers, and farming tools. These products are designed to boost productivity and ensure the health of your crops.",
-        "image": "../public/WeOffer/s1.png",
-        "icon": "../public/WeOffer/icon3.png",
+        "image": "https://iili.io/dO4pNrF.png",
+        "icon": "https://iili.io/dO6dfcP.png",
         "details": {
           "keyFeatures": [
             "Certified high-yield seeds",
@@ -27,11 +27,11 @@
         }
       },
       {
-        "id": 2,
+     
         "title": "Organic Products",
         "description": "Our Organic Products line includes a variety of natural and organic fertilizers, pesticides, and soil conditioners. These products are perfect for farmers who are committed to sustainable and chemical-free farming.",
-        "image": "../public/WeOffer/s2.png",
-        "icon": "../public/WeOffer/icon1.png",
+        "image": "https://iili.io/dO620dP.png",
+        "icon": "https://iili.io/dO63Fv1.png",
         "details": {
           "keyFeatures": [
             "Certified organic fertilizers",
@@ -54,11 +54,11 @@
         }
       },
       {
-        "id": 3,
+       
         "title": "Dairy Products",
         "description": "Our Dairy Products category provides a range of dairy farming essentials including feed, milking equipment, and health supplements. These products are aimed at ensuring the well-being of livestock and high-quality milk production.",
-        "image": "../public/WeOffer/s3.png",
-        "icon": "../public/WeOffer/icon2.png",
+        "image": "https://iili.io/dO6F2Vf.png",
+        "icon": "https://iili.io/dO6KxdN.png",
         "details": {
           "keyFeatures": [
             "Nutrient-rich livestock feed",

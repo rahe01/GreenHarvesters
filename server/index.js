@@ -49,6 +49,7 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     const userCollection = client.db("GreenHarvest").collection("users");
+    const weofferCollection = client.db("GreenHarvest").collection("Offer");
 
     // auth related api
     app.post("/jwt", async (req, res) => {
@@ -107,6 +108,44 @@ async function run() {
         res.status(500).send({ message: "An error occurred", error });
       }
     });
+
+
+
+    // **********************We offer related api ****************
+
+    // get offer
+    app.get('/getoffer' , async (req, res) => {
+      try {
+        const offers = await weofferCollection.find().toArray();
+        res.send(offers);
+      } catch (error) {
+        res.status(500).send({ message: "An error occurred", error });
+      }
+    })
+
+    // get offer by id 
+    app.get('/getofferbyid:/id' , async (req, res) => {
+      const id = new ObjectId(req.params.id);
+      try {
+        const offer = await weofferCollection.findOne({ _id: id });
+        res.send(offer);
+      } catch (error) {
+        res.status(500).send({ message: "An error occurred", error });
+      }
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
