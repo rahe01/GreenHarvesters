@@ -6,7 +6,7 @@ const Project = () => {
 
   useEffect(() => {
     // Fetch the project data from the public directory
-    fetch("/project.json")
+    fetch(`${import.meta.env.VITE_API_URL}/getprojects`)
       .then((response) => response.json())
       .then((data) => setProjects(data))
       .catch((error) => console.error("Error fetching project data:", error));

@@ -50,6 +50,7 @@ async function run() {
   try {
     const userCollection = client.db("GreenHarvest").collection("users");
     const weofferCollection = client.db("GreenHarvest").collection("Offer");
+    const projectCollection = client.db("GreenHarvest").collection("Projects");
 
     // auth related api
     app.post("/jwt", async (req, res) => {
@@ -133,6 +134,36 @@ app.get('/getofferbyid/:id', async (req, res) => {
       res.status(404).send({ message: "Offer not found" });
     } else {
       res.send(offer);
+    }
+  } catch (error) {
+    res.status(500).send({ message: "An error occurred", error });
+  }
+});
+
+
+
+// ************************projects related ************************
+
+// get all projects
+app.get('/getprojects', async (req, res) => {
+  try {
+    const projects = await projectCollection.find().toArray();
+    res.send(projects);
+  } catch (error) {
+    res.status(500).send({ message: "An error occurred", error });
+  }
+});
+
+
+// get projects by id 
+app.get('/getprojectbyid/:id', async (req, res) => {
+  const id = new ObjectId(req.params.id); // Convert the ID to an ObjectId
+  try {
+    const project = await projectCollection.findOne({ _id: id });
+    if (!project) {
+      res.status(404).send({ message: "Project not found" });
+    } else {
+      res.send(project);
     }
   } catch (error) {
     res.status(500).send({ message: "An error occurred", error });

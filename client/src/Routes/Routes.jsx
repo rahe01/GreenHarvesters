@@ -5,6 +5,7 @@ import ErrorPage from '../pages/ErrorPage'
 import Login from '../pages/Login/Login'
 import SignUp from '../pages/SignUp/SignUp'
 import WeOfferSingle from '../pages/Outlet/WeOffer/WeOfferSingle'
+import ProjectSingle from '../pages/Outlet/Project/ProjectSingle'
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,11 @@ export const router = createBrowserRouter([
         path: '/offer/:id',
         element: <WeOfferSingle></WeOfferSingle>,
         loader: ({params}) => fetch (`${import.meta.env.VITE_API_URL}/getofferbyid/${params.id}`)
+      },
+      {
+        path: '/projects/:id',
+        element: <ProjectSingle></ProjectSingle>,
+        loader: ({params}) => fetch (`${import.meta.env.VITE_API_URL}/getprojectbyid/${params.id}`)
       }
       
     ],
