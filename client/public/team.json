@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "name": "Leroy Jenkins",
+        "role": "Crop Specialist",
+        "image": "https://iili.io/dk5bLwG.jpg",
+        "email": "leroy@farm.com",
+        "twitter": "#",
+        "description": "Leroy Jenkins has over 15 years of experience in crop management, specializing in optimizing yields and improving crop health."
+    },
+    {
+        "id": 2,
+        "name": "Alice Johnson",
+        "role": "Soil Expert",
+        "image": "https://iili.io/dk5DiLQ.jpg",
+        "email": "alice@farm.com",
+        "twitter": "#",
+        "description": "Alice Johnson is an expert in soil science, focusing on soil fertility and sustainable practices to enhance agricultural productivity."
+    },
+    {
+        "id": 3,
+        "name": "John Doe",
+        "role": "Agronomist",
+        "image": "https://iili.io/dk7F5WF.png",
+        "email": "john@farm.com",
+        "twitter": "#",
+        "description": "John Doe provides expert advice on crop production and soil management, combining scientific research with practical field experience."
+    },
+    {
+        "id": 4,
+        "name": "Emily Davis",
+        "role": "Plant Pathologist",
+        "image": "https://iili.io/dk7Kv4a.png",
+        "email": "emily@farm.com",
+        "twitter": "#",
+        "description": "Emily Davis specializes in plant diseases and their management, working to prevent and control plant health issues for optimal growth."
+    }
+]
