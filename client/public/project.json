@@ -1,0 +1,46 @@
+[
+  {
+    "title": "Easy Harvesting",
+    "projectImage": "https://iili.io/dk52Oog.png",
+    "description": "A project focused on simplifying the harvesting process with advanced agricultural techniques.",
+    "clientInfo": {
+      "name": "John Doe",
+      "address": "123 Farming Street, Agriculture City",
+      "clientImage": "https://iili.io/dk5DiLQ.jpg",
+      "phone": "+1234567890"
+    }
+  },
+  {
+    "title": "Ecological Farming",
+    "projectImage": "https://iili.io/dk539O7.png",
+    "description": "An initiative to promote eco-friendly farming practices that sustain the environment.",
+    "clientInfo": {
+      "name": "Jane Smith",
+      "address": "456 Green Valley, Eco Town",
+      "clientImage": "https://iili.io/dk7Kv4a.png",
+      "phone": "+0987654321"
+    }
+  },
+  {
+    "title": "Organic Solutions",
+    "projectImage": "https://iili.io/dk53LmP.png",
+    "description": "Providing organic solutions for healthy and sustainable farming.",
+    "clientInfo": {
+      "name": "Ahmed Khan",
+      "address": "789 Organic Road, Green City",
+      "clientImage": "https://iili.io/dk7F5WF.png",
+      "phone": "+1122334455"
+    }
+  },
+  {
+    "title": "Healthy Food Products",
+    "projectImage": "https://iili.io/dk5KYNI.png",
+    "description": "Developing and promoting healthy food products from farm to table.",
+    "clientInfo": {
+      "name": "Sara Lee",
+      "address": "321 Wellness Way, Freshville",
+      "clientImage": "https://iili.io/dk5bLwG.jpg",
+      "phone": "+6677889900"
+    }
+  }
+]
