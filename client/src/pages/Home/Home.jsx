@@ -18,6 +18,8 @@ const Home = () => {
             <Project></Project>
             <Team></Team>
             <Testimonial></Testimonial>
+
+           
             
         </div>
     );
