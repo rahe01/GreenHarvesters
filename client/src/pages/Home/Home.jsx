@@ -1,6 +1,7 @@
 
 
 import { Banner } from './Banner/Banner';
+import Contact from './Contact/Contact';
 import Faq from './FAQ/Faq';
 import Knowus from './KnowUs/Knowus';
 import Project from './Project/Project';
@@ -17,7 +18,9 @@ const Home = () => {
             <Faq></Faq>
             <Project></Project>
             <Team></Team>
-            {/* <Testimonial></Testimonial> */}
+            <Testimonial></Testimonial>
+
+            <Contact></Contact>
 
            
             
