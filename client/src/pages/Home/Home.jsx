@@ -17,7 +17,7 @@ const Home = () => {
             <Faq></Faq>
             <Project></Project>
             <Team></Team>
-            <Testimonial></Testimonial>
+            {/* <Testimonial></Testimonial> */}
 
            
             
