@@ -7,14 +7,14 @@ const Knowus = () => {
       style={{ backgroundImage: `url('/KnowUs/bg1.png')` }}
     >
       <div className="container mx-auto flex flex-col lg:flex-row items-center gap-8">
-        <div className="text-black max-w-3xl text-center lg:text-left lg:w-1/2">
-          <h1 className="text-4xl font-bold mb-4 font-2nd text-amber-400">
+        <div className="text-black max-w-3xl text-center lg:text-left lg:w-1/2 animate-fade-in">
+          <h1 className="text-4xl font-bold mb-4 font-2nd text-amber-400 transition-transform duration-300 ease-in-out transform hover:scale-105">
             Get to Know Us
           </h1>
-          <p className="text-3xl font-extrabold mb-4">
+          <p className="text-3xl font-extrabold mb-4 transition-opacity duration-300 ease-in-out opacity-0 animate-opacity">
             Leader in Agriculture Market
           </p>
-          <p className="text-lg mb-8">
+          <p className="text-lg mb-8 transition-opacity duration-300 ease-in-out opacity-0 animate-opacity">
             At Green Harvest, we are dedicated to revolutionizing the
             agricultural sector. With years of expertise and a commitment to
             innovation, we provide cutting-edge solutions that drive progress
@@ -23,9 +23,9 @@ const Knowus = () => {
             future for agriculture and the communities it supports.
           </p>
 
-          <div className="mb-4 flex">
+          <div className="mb-4 flex animate-fade-in">
             <div className="flex-1">
-              <h1 className="text-3xl font-bold mb-2 font-2nd text-green-500">
+              <h1 className="text-3xl font-bold mb-2 font-2nd text-green-500 transition-transform duration-300 ease-in-out transform hover:scale-105">
                 Modern Agriculture Types
               </h1>
               <p className="text-lg">
@@ -35,10 +35,10 @@ const Knowus = () => {
                 discover how we can help you achieve your agricultural goals.
               </p>
             </div>
-            <div className="flex-1 hidden lg:block ">
+            <div className="flex-1 hidden lg:block">
               {/* Video element below the first image */}
               <iframe
-                className="w-full h-72 "
+                className="w-full h-72 transition-transform duration-300 ease-in-out transform hover:scale-105"
                 src="https://www.youtube.com/embed/SNKWRB1-5pA?si=wH1B_cYhn7RLJxaf"
                 title="YouTube Video"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -48,17 +48,21 @@ const Knowus = () => {
             </div>
           </div>
 
-          <Button label={"Discover More"} />
+          <Button label={"Discover More"} className="transition-transform duration-300 ease-in-out transform hover:scale-110" />
         </div>
 
-        <div className="lg:w-1/2 hidden lg:block">
-          <div className="grid grid-cols-1 lg:grid-cols-2">
+        <div className="lg:w-1/2 hidden lg:block animate-fade-in">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <img
-              className="w-full h-full"
+              className="w-full h-full transition-transform duration-300 ease-in-out transform hover:scale-105"
               src="/KnowUs/img3.png"
               alt="Image 1"
             />
-            <img className="w-full" src="/KnowUs/img2.png" alt="Image 2" />
+            <img
+              className="w-full transition-transform duration-300 ease-in-out transform hover:scale-105"
+              src="/KnowUs/img2.png"
+              alt="Image 2"
+            />
           </div>
         </div>
       </div>

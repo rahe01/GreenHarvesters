@@ -75,3 +75,25 @@ body {
 #primary li a:hover:before {
     width: 100%;
 }
+
+
+
+
+/* In your global CSS or Tailwind CSS configuration */
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .animate-opacity {
+    opacity: 1;
+  }
+  
