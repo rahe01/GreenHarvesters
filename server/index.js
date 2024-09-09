@@ -109,9 +109,6 @@ async function run() {
         res.status(500).send({ message: "An error occurred", error });
       }
     });
-
-
-
     // **********************We offer related api ****************
 
     // get offer

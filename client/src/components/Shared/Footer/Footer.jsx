@@ -15,7 +15,7 @@ const Footer = () => {
               />
             </Link>
             <p className="text-sm  text-center">
-              Welcome to AgriSolutions - Your gateway to comprehensive
+              Welcome to GreenHarvest - Your gateway to comprehensive
               agricultural solutions. We offer a range of services including
               crop management, weather monitoring, market prices, and financial
               services to help farmers thrive. Our platform provides real-time
@@ -172,7 +172,7 @@ const Footer = () => {
 
       <div className="py-6 border-t border-gray-300 text-center ">
         <span>
-          &copy; {new Date().getFullYear()} AgriSolutions. All rights reserved.
+          &copy; {new Date().getFullYear()} GreenHarvest. All rights reserved.
         </span>
       </div>
     </div>
