@@ -235,6 +235,21 @@ async function run() {
       }
     });
 
+    // get blogs by id
+
+    app.get("/getblogbyid/:id", async (req, res) => {
+      const id = new ObjectId(req.params.id); // Convert the ID to an ObjectId
+      try {
+        const blog = await blosCollection.findOne({ _id: id });
+        if (!blog) {
+          res.status(404).send({ message: "Blog not found" });
+        } else {
+          res.send(blog);
+        }
+      } catch (error) {
+        res.status(500).send({ message: "An error occurred", error });
+      }
+    });
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });

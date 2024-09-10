@@ -12,6 +12,8 @@ import Project from "../pages/Home/Project/Project";
 import About from "../pages/Home/About/About";
 import Blogs from "../pages/Home/Blogs/Blogs";
 import AddBlogs from "../pages/Outlet/AddBlogs/AddBlogs";
+import PrivateRoute from "./PrivateRoute";
+import Blog from "../pages/Outlet/Blog/Blog";
 
 export const router = createBrowserRouter([
   {
@@ -40,12 +42,22 @@ export const router = createBrowserRouter([
         element: <About></About>,
       },
       {
-        path: '/blogs',
-        element : <Blogs></Blogs>
+        path: "/blogs",
+        element: <Blogs></Blogs>,
       },
       {
-        path: '/addBlogs',
-        element: <AddBlogs></AddBlogs>
+        path: "/addBlogs",
+        element: (
+          <PrivateRoute>
+            <AddBlogs></AddBlogs>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/blog/:id",
+        element: <Blog></Blog>,
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_API_URL}/getblogbyid/${params.id}`),
       },
       {
         path: "/offer/:id",
