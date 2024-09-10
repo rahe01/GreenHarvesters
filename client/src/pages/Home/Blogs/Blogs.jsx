@@ -1,43 +1,42 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlinePlus } from 'react-icons/ai';
 import Title from '../../../components/Shared/Title/Title';
 import { Select, Option } from '@material-tailwind/react';
-
-const blogsData = [
-    {
-        id: 1,
-        title: 'Noster tincidunt reprimique ad pro',
-        date: 'February 19, 2021',
-        category: 'Technology',
-        imgSrc: 'https://source.unsplash.com/random/480x360',
-        description: 'Ei delenit sensibus liberavisse pri...',
-    },
-    {
-        id: 2,
-        title: 'In usu laoreet repudiare legendos',
-        date: 'January 21, 2021',
-        category: 'Health',
-        imgSrc: 'https://source.unsplash.com/random/480x360?1',
-        description: 'Mei ex aliquid eleifend forensibus...',
-    },
-    // Add more blog data here
-];
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const Blogs = () => {
+    const [blogs, setBlogs] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
+    const axiosSecure = useAxiosSecure();
+
+    // Fetch blogs from the backend
+    useEffect(() => {
+        const fetchBlogs = async () => {
+            try {
+                const response = await axiosSecure.get('/getblogs');
+                // Sort blogs by date (latest first)
+                const sortedBlogs = response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
+                setBlogs(sortedBlogs);
+            } catch (error) {
+                console.error('Error fetching blogs:', error);
+            }
+        };
+
+        fetchBlogs();
+    }, [axiosSecure]);
 
     // Filter blogs based on category and search query
-    const filteredBlogs = blogsData.filter((blog) => {
+    const filteredBlogs = blogs.filter((blog) => {
         const matchesCategory = selectedCategory === '' || blog.category === selectedCategory;
         const matchesSearchQuery = blog.title.toLowerCase().includes(searchQuery.toLowerCase());
         return matchesCategory && matchesSearchQuery;
     });
 
     return (
-        <div className="">
-            <Title title={"Blogs"} />
+        <div>
+            <Title title="Blogs" />
             {/* Header with filter and buttons */}
             <div className="flex flex-col md:flex-row justify-between items-center p-6 gap-4">
                 <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
@@ -87,43 +86,36 @@ const Blogs = () => {
 
             {/* Blogs Listing */}
             <section className="dark:bg-gray-100 dark:text-gray-800">
-                <div className="container max-w-6xl mx-auto space-y-6 sm:space-y-12">
+                <div className="max-w-screen-xl p-5 mx-auto">
                     {filteredBlogs.length > 0 ? (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-1 gap-5 lg:grid-cols-4 sm:grid-cols-2">
                             {filteredBlogs.map((blog) => (
-                                <a
-                                    key={blog.id}
-                                    href="#"
-                                    className="block max-w-full group hover:no-underline focus:no-underline lg:grid lg:grid-cols-12 dark:bg-gray-50"
+                                <div
+                                    key={blog._id}
+                                    className="relative flex items-end justify-start w-full text-left bg-center bg-cover h-96"
+                                    style={{ backgroundImage: `url(${blog.imgSrc})` }}
                                 >
-                                    <img
-                                        src={blog.imgSrc}
-                                        alt={blog.title}
-                                        className="object-cover w-full h-64 rounded sm:h-80 lg:col-span-7 dark:bg-gray-500"
-                                    />
-                                    <div className="p-6 space-y-2 lg:col-span-5">
-                                        <h3 className="text-xl font-semibold sm:text-2xl lg:text-3xl group-hover:underline group-focus:underline">
-                                            {blog.title}
-                                        </h3>
-                                        <span className="text-xs dark:text-gray-600">{blog.date}</span>
-                                        <p className="text-sm">{blog.description}</p>
+                                    <div className="absolute top-0 bottom-0 left-0 right-0 bg-gradient-to-b from-transparent via-transparent to-gray-900"></div>
+                                    <div className="absolute top-0 left-0 right-0 flex items-center justify-between mx-5 mt-3">
+                                        <span className="px-3 py-2 text-xs font-semibold tracking-wider uppercase bg-violet-600 text-white">
+                                            {blog.category}
+                                        </span>
+                                        <div className="flex flex-col justify-start text-center text-white">
+                                            <span className="text-3xl font-semibold leading-none tracking-wide">{new Date(blog.date).getDate()}</span>
+                                            <span className="leading-none uppercase">{new Date(blog.date).toLocaleString('default', { month: 'short' })}</span>
+                                        </div>
                                     </div>
-                                </a>
+                                    <h2 className="z-10 p-5">
+                                        <Link to={`/blog/${blog._id}`} className="font-medium text-md hover:underline text-white">
+                                            {blog.title}
+                                        </Link>
+                                    </h2>
+                                </div>
                             ))}
                         </div>
                     ) : (
-                        <p className="text-center text-lg">No blogs found.</p>
+                        <p className="text-center">No blogs found.</p>
                     )}
-
-                    {/* Load more button */}
-                    <div className="flex justify-center mt-6">
-                        <button
-                            type="button"
-                            className="px-6 py-3 text-sm rounded-md hover:underline dark:bg-gray-50 dark:text-gray-600"
-                        >
-                            Load more posts...
-                        </button>
-                    </div>
                 </div>
             </section>
         </div>

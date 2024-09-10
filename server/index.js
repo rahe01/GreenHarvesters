@@ -165,52 +165,75 @@ async function run() {
       }
     });
 
-
-
     // ***********************Blogs related****************
 
-// add blogs
-app.post("/addblogs", async (req, res) => {
-  const { title, description, imgSrc, category, userEmail, userName, userImage } = req.body;
+    // add blogs
+    app.post("/addblogs", async (req, res) => {
+      const {
+        title,
+        description,
+        imgSrc,
+        category,
+        userEmail,
+        userName,
+        userImage,
+      } = req.body;
 
-  // Check for missing fields
-  if (!title || !description || !imgSrc || !category || !userEmail || !userName || !userImage) {
-    return res.status(400).json({ message: "All fields are required." });
-  }
+      // Check for missing fields
+      if (
+        !title ||
+        !description ||
+        !imgSrc ||
+        !category ||
+        !userEmail ||
+        !userName ||
+        !userImage
+      ) {
+        return res.status(400).json({ message: "All fields are required." });
+      }
 
-  try {
-    const newBlog = {
-      title,
-      description,
-      imgSrc,
-      category,
-      userEmail,
-      userName,
-      userImage,
-      date: new Date().toISOString(),
-    };
+      try {
+        const newBlog = {
+          title,
+          description,
+          imgSrc,
+          category,
+          userEmail,
+          userName,
+          userImage,
+          date: new Date().toISOString(),
+        };
 
-    // Insert the blog into the database
-    const result = await blosCollection.insertOne(newBlog);
+        // Insert the blog into the database
+        const result = await blosCollection.insertOne(newBlog);
 
-    // Check if insertion was successful
-    if (result.acknowledged) {
-      res.status(201).json({ message: "Blog added successfully!", blog: newBlog });
-    } else {
-      res.status(500).json({ message: "Failed to add blog to the database." });
-    }
-  } catch (error) {
-    console.error("Error adding blog:", error);
-    res.status(500).json({ message: "An error occurred while adding the blog." });
-  }
-});
+        // Check if insertion was successful
+        if (result.acknowledged) {
+          res
+            .status(201)
+            .json({ message: "Blog added successfully!", blog: newBlog });
+        } else {
+          res
+            .status(500)
+            .json({ message: "Failed to add blog to the database." });
+        }
+      } catch (error) {
+        console.error("Error adding blog:", error);
+        res
+          .status(500)
+          .json({ message: "An error occurred while adding the blog." });
+      }
+    });
 
-
-
-
-    
-
-
+    // get all blogs
+    app.get("/getblogs", async (req, res) => {
+      try {
+        const blogs = await blosCollection.find().toArray();
+        res.send(blogs);
+      } catch (error) {
+        res.status(500).send({ message: "An error occurred", error });
+      }
+    });
 
 
     // Send a ping to confirm a successful connection
