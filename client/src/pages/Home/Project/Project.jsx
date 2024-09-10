@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import Title from "../../../components/Shared/Title/Title";
 
 const Project = () => {
   const [projects, setProjects] = useState([]);
+  const location = useLocation()
 
   useEffect(() => {
     // Fetch the project data from the public directory
@@ -13,7 +15,11 @@ const Project = () => {
   }, []);
 
   return (
-    <div className="py-5">
+    <div>
+      {location.pathname === '/projects' && <Title title={"Explore Our Projects"}></Title>}
+
+
+      <div className="py-5">
       <h3 className="font-2nd text-xl text-yellow-300 text-center">Recently Completed</h3>
       <h1 className="text-3xl font-bold text-center">Explore Projects</h1>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 p-4 container mx-auto">
@@ -32,6 +38,7 @@ const Project = () => {
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 };

@@ -7,6 +7,7 @@ const Contact = () => {
         <div>
             <ContactHtml></ContactHtml>
             <ContactMore></ContactMore>
+            
         </div>
     );
 };

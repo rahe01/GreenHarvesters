@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import LoadingSpinner from '../../../components/Shared/LoadingSpinner';
+import Title from '../../../components/Shared/Title/Title';
 
 const WeOffer = () => {
   const [offers, setOffers] = useState([]);
+  const location = useLocation()
 
   useEffect(() => {
     const apiUrl = import.meta.env.VITE_API_URL; // Access the API URL from the environment variable
@@ -20,7 +22,9 @@ const WeOffer = () => {
   }, []);
 
   return (
-    <div
+    <div>
+      {location.pathname === '/services' && <Title title={"Our Services"}></Title>}
+      <div
       className="bg-cover bg-center bg-no-repeat p-8"
       style={{ backgroundImage: `url('./WeOffer/banner.png')` }}
     >
@@ -58,6 +62,7 @@ const WeOffer = () => {
           )}
         </div>
       </div>
+    </div>
     </div>
   );
 };

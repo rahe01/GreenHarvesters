@@ -11,7 +11,7 @@ const Title = ({ title }) => {
         />
   
         {/* Centered Title */}
-        <h1 className="text-white text-4xl font-bold bg-black bg-opacity-50 px-4 py-2 rounded-lg">
+        <h1 className=" text-6xl font-bold bg-black bg-opacity-50 px-4 py-2 rounded-lg font-2nd text-yellow-200">
           {title}
         </h1>
       </div>

@@ -167,7 +167,7 @@ const Nav = () => {
             id="primary"
           >
             <li>
-              <NavLinkk title={"Home"} address={"/login"}></NavLinkk>
+              <NavLinkk title={"Home"} address={"/"}></NavLinkk>
             </li>
             <li>
               <NavLinkk title={"About"} address={"/about"}></NavLinkk>
