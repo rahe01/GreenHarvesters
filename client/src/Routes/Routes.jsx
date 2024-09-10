@@ -10,6 +10,8 @@ import Contact from "../pages/Home/Contact/Contact";
 import WeOffer from "../pages/Home/WeOffer/WeOffer";
 import Project from "../pages/Home/Project/Project";
 import About from "../pages/Home/About/About";
+import Blogs from "../pages/Home/Blogs/Blogs";
+import AddBlogs from "../pages/Outlet/AddBlogs/AddBlogs";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +38,14 @@ export const router = createBrowserRouter([
       {
         path: "/about",
         element: <About></About>,
+      },
+      {
+        path: '/blogs',
+        element : <Blogs></Blogs>
+      },
+      {
+        path: '/addBlogs',
+        element: <AddBlogs></AddBlogs>
       },
       {
         path: "/offer/:id",
