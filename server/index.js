@@ -51,6 +51,7 @@ async function run() {
     const userCollection = client.db("GreenHarvest").collection("users");
     const weofferCollection = client.db("GreenHarvest").collection("Offer");
     const projectCollection = client.db("GreenHarvest").collection("Projects");
+    const blosCollection = client.db("GreenHarvest").collection("blogs");
 
     // auth related api
     app.post("/jwt", async (req, res) => {
@@ -112,71 +113,102 @@ async function run() {
     // **********************We offer related api ****************
 
     // get offer
-    app.get('/getoffer' , async (req, res) => {
+    app.get("/getoffer", async (req, res) => {
       try {
         const offers = await weofferCollection.find().toArray();
         res.send(offers);
       } catch (error) {
         res.status(500).send({ message: "An error occurred", error });
       }
-    })
+    });
 
-    // get offer by id 
- // Get offer by ID
-app.get('/getofferbyid/:id', async (req, res) => {
-  const id = new ObjectId(req.params.id); // Convert the ID to an ObjectId
+    // get offer by id
+    // Get offer by ID
+    app.get("/getofferbyid/:id", async (req, res) => {
+      const id = new ObjectId(req.params.id); // Convert the ID to an ObjectId
+      try {
+        const offer = await weofferCollection.findOne({ _id: id });
+        if (!offer) {
+          res.status(404).send({ message: "Offer not found" });
+        } else {
+          res.send(offer);
+        }
+      } catch (error) {
+        res.status(500).send({ message: "An error occurred", error });
+      }
+    });
+
+    // ************************projects related ************************
+
+    // get all projects
+    app.get("/getprojects", async (req, res) => {
+      try {
+        const projects = await projectCollection.find().toArray();
+        res.send(projects);
+      } catch (error) {
+        res.status(500).send({ message: "An error occurred", error });
+      }
+    });
+
+    // get projects by id
+    app.get("/getprojectbyid/:id", async (req, res) => {
+      const id = new ObjectId(req.params.id); // Convert the ID to an ObjectId
+      try {
+        const project = await projectCollection.findOne({ _id: id });
+        if (!project) {
+          res.status(404).send({ message: "Project not found" });
+        } else {
+          res.send(project);
+        }
+      } catch (error) {
+        res.status(500).send({ message: "An error occurred", error });
+      }
+    });
+
+
+
+    // ***********************Blogs related****************
+
+// add blogs
+app.post("/addblogs", async (req, res) => {
+  const { title, description, imgSrc, category, userEmail, userName, userImage } = req.body;
+
+  // Check for missing fields
+  if (!title || !description || !imgSrc || !category || !userEmail || !userName || !userImage) {
+    return res.status(400).json({ message: "All fields are required." });
+  }
+
   try {
-    const offer = await weofferCollection.findOne({ _id: id });
-    if (!offer) {
-      res.status(404).send({ message: "Offer not found" });
+    const newBlog = {
+      title,
+      description,
+      imgSrc,
+      category,
+      userEmail,
+      userName,
+      userImage,
+      date: new Date().toISOString(),
+    };
+
+    // Insert the blog into the database
+    const result = await blosCollection.insertOne(newBlog);
+
+    // Check if insertion was successful
+    if (result.acknowledged) {
+      res.status(201).json({ message: "Blog added successfully!", blog: newBlog });
     } else {
-      res.send(offer);
+      res.status(500).json({ message: "Failed to add blog to the database." });
     }
   } catch (error) {
-    res.status(500).send({ message: "An error occurred", error });
-  }
-});
-
-
-
-// ************************projects related ************************
-
-// get all projects
-app.get('/getprojects', async (req, res) => {
-  try {
-    const projects = await projectCollection.find().toArray();
-    res.send(projects);
-  } catch (error) {
-    res.status(500).send({ message: "An error occurred", error });
-  }
-});
-
-
-// get projects by id 
-app.get('/getprojectbyid/:id', async (req, res) => {
-  const id = new ObjectId(req.params.id); // Convert the ID to an ObjectId
-  try {
-    const project = await projectCollection.findOne({ _id: id });
-    if (!project) {
-      res.status(404).send({ message: "Project not found" });
-    } else {
-      res.send(project);
-    }
-  } catch (error) {
-    res.status(500).send({ message: "An error occurred", error });
+    console.error("Error adding blog:", error);
+    res.status(500).json({ message: "An error occurred while adding the blog." });
   }
 });
 
 
 
 
-
-
-
-
-
-
-
+    
 
 
 

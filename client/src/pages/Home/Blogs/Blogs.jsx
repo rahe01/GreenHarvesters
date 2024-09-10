@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlinePlus } from 'react-icons/ai';
 import Title from '../../../components/Shared/Title/Title';
+import { Select, Option } from '@material-tailwind/react';
 
 const blogsData = [
     {
@@ -36,21 +37,29 @@ const Blogs = () => {
 
     return (
         <div className="">
-            <Title title={"Blogs"}></Title>
+            <Title title={"Blogs"} />
             {/* Header with filter and buttons */}
             <div className="flex flex-col md:flex-row justify-between items-center p-6 gap-4">
-                <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
                     {/* Filter by Category */}
-                    <select
+                    <Select
                         value={selectedCategory}
-                        onChange={(e) => setSelectedCategory(e.target.value)}
-                        className="px-4 py-2 rounded-full border border-gray-300"
+                        onChange={(value) => setSelectedCategory(value)}
+                        label="Select a Category"
+                        className="w-full sm:w-72 md:w-80 lg:w-96"
                     >
-                        <option value="">All Categories</option>
-                        <option value="Technology">Technology</option>
-                        <option value="Health">Health</option>
-                        <option value="Business">Business</option>
-                    </select>
+                        <Option value="">All Categories</Option>
+                        <Option value="Crops">Crops</Option>
+                        <Option value="Farming Techniques">Farming Techniques</Option>
+                        <Option value="Livestock">Livestock</Option>
+                        <Option value="Pest and Disease Management">Pest and Disease Management</Option>
+                        <Option value="Soil and Fertilizers">Soil and Fertilizers</Option>
+                        <Option value="Technology and Equipment">Technology and Equipment</Option>
+                        <Option value="Market and Economics">Market and Economics</Option>
+                        <Option value="Sustainability">Sustainability</Option>
+                        <Option value="Education and Resources">Education and Resources</Option>
+                        <Option value="Events and News">Events and News</Option>
+                    </Select>
 
                     {/* Search by Title */}
                     <input
@@ -58,7 +67,7 @@ const Blogs = () => {
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Search by title"
-                        className="px-4 py-2 rounded-full border border-gray-300 w-full sm:w-auto"
+                        className="px-4 py-2 rounded-full border border-gray-300 w-full sm:w-72"
                     />
                 </div>
 
@@ -70,7 +79,7 @@ const Blogs = () => {
                             className="color1b flex items-center gap-2 px-6 py-3 text-sm font-semibold rounded-full text-white hover:shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out"
                         >
                             <AiOutlinePlus size={20} />
-                            Add Blog 
+                            Add Blog
                         </button>
                     </Link>
                 </div>
