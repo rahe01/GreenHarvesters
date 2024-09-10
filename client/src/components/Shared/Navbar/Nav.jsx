@@ -179,7 +179,7 @@ const Nav = () => {
               <NavLinkk title={"Projects"} address={"/projects"}></NavLinkk>
             </li>
             <li>
-              <NavLinkk title={"News"} address={"/news"}></NavLinkk>
+              <NavLinkk title={"Blogs"} address={"/blogs"}></NavLinkk>
             </li>
             <li>
               <NavLinkk title={"Shop"} address={"/shop"}></NavLinkk>
