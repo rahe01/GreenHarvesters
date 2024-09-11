@@ -15,6 +15,7 @@ import AddBlogs from "../pages/Outlet/AddBlogs/AddBlogs";
 import PrivateRoute from "./PrivateRoute";
 import Blog from "../pages/Outlet/Blog/Blog";
 import Shop from "../pages/Shop/Shop";
+import DefaultLayout from "../layouts/DefaultLayout";
 
 export const router = createBrowserRouter([
   {
@@ -80,4 +81,8 @@ export const router = createBrowserRouter([
   },
   { path: "/login", element: <Login /> },
   { path: "/signup", element: <SignUp /> },
+  {
+    path: '/dashboard',
+    element: <DefaultLayout></DefaultLayout>
+  }
 ]);
