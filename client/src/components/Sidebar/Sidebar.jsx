@@ -5,7 +5,7 @@ import { GrLogout } from 'react-icons/gr';
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   return (
     <div
-      className={`fixed inset-y-0 left-0 z-30 w-64 transform bg-white dark:bg-gray-800 p-5 transition-transform ${
+      className={`fixed inset-y-0 left-0 z-30 w-64 transform color2b dark:bg-gray-800 p-5 transition-transform ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
       } md:translate-x-0 md:static md:inset-0`}
     >
