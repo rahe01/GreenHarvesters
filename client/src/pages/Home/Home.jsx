@@ -6,6 +6,7 @@ import Faq from './FAQ/Faq';
 import Knowus from './KnowUs/Knowus';
 import Project from './Project/Project';
 import Testimonial from './Review/Review';
+import Stats from './Stats/Stats';
 import Team from './Team/Team';
 import WeOffer from './WeOffer/WeOffer';
 
@@ -18,6 +19,7 @@ const Home = () => {
             <Faq></Faq>
             <Project></Project>
             <Team></Team>
+            <Stats></Stats>
             <Testimonial></Testimonial>
 
             <Contact></Contact>
