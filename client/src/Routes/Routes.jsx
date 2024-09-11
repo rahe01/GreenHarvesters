@@ -14,6 +14,7 @@ import Blogs from "../pages/Home/Blogs/Blogs";
 import AddBlogs from "../pages/Outlet/AddBlogs/AddBlogs";
 import PrivateRoute from "./PrivateRoute";
 import Blog from "../pages/Outlet/Blog/Blog";
+import Shop from "../pages/Shop/Shop";
 
 export const router = createBrowserRouter([
   {
@@ -71,6 +72,10 @@ export const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_API_URL}/getprojectbyid/${params.id}`),
       },
+      {
+        path: '/shop',
+        element: <Shop></Shop>
+      }
     ],
   },
   { path: "/login", element: <Login /> },
