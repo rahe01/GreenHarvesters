@@ -24,7 +24,7 @@ const Profile = () => {
         <img
           src="https://iili.io/dgYGyrB.jpg"
           alt="profile cover"
-          className="h-full w-full rounded-tl-sm rounded-tr-sm object-cover object-center"
+          className="h-full w-full rounded-t-xl rounded-tr-sm object-cover object-center"
         />
         <div className="absolute bottom-1 right-1 z-10 xsm:bottom-4 xsm:right-4">
           <label
@@ -38,7 +38,7 @@ const Profile = () => {
       </div>
 
       {/* Profile Card */}
-      <div className=" rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+      <div className=" rounded-sm border border-stroke bg-white dark:bg-blue-gray-200 shadow-default dark:border-strokedark dark:bg-boxdark">
         
         {/* Profile Info */}
         <div className="px-4 pb-6 text-center lg:pb-8 xl:pb-11.5">
@@ -64,7 +64,7 @@ const Profile = () => {
 
           {/* Name and Role */}
           <div className="mt-4">
-            <h3 className="mb-1.5 text-2xl font-semibold text-black dark:text-white">
+            <h3 className="mb-1.5 text-2xl font-semibold text-black">
             {displayName}
             </h3>
             <p className="font-bold text-xl color1t underline uppercase">{role}</p>
