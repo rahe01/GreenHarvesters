@@ -310,6 +310,34 @@ async function run() {
       });
     })
 
+    // update blogs
+    app.put('/updateblog/:id', async (req, res) => {
+      const id = new ObjectId(req.params.id);
+      const { title, description, imgSrc, category} = req.body;
+      const updatedBlog = {
+        title,
+        description,
+        imgSrc,
+        category,
+        date: new Date().toISOString(),
+      };
+
+      try {
+        const result = await blosCollection.updateOne(
+          { _id: id },
+          { $set: updatedBlog }
+        );
+
+        if (result.modifiedCount === 0) {
+          return res.status(404).send({ message: "Blog not found" });
+        }
+
+        res.send(updatedBlog);
+      } catch (error) {
+        res.status(500).send({ message: "An error occurred", error });
+      }
+    })
+
 
 
     // Send a ping to confirm a successful connection

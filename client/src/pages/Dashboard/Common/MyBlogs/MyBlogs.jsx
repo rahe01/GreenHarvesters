@@ -1,23 +1,24 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import useAxiosSecure from "../../../../hooks/useAxiosSecure";
-import { FaTrash } from "react-icons/fa";
-import { MdEditSquare } from "react-icons/md";
+import { useState } from "react";
+import EmptyState from "../../../../components/Shared/EmptyState copy";
 import useAuth from "../../../../hooks/useAuth";
-import Breadcrumb from "../../../../components/Breadcrumb/Breadcrumb";
-import ConfirmationModal from "../../../../components/Shared/Modal/ConfirmationModal";
-import { useNavigate } from "react-router-dom";
-import { useState } from 'react';
-import toast from 'react-hot-toast';
-import EmptyState from '../../../../components/Shared/EmptyState copy';
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import UpdateBlogModal from "./UpdateBlogModal";
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import toast from "react-hot-toast";
+import Breadcrumb from './../../../../components/Breadcrumb/Breadcrumb';
+import { MdEditSquare } from 'react-icons/md';
+import { FaTrash } from 'react-icons/fa';
+import ConfirmationModal from './../../../../components/Shared/Modal/ConfirmationModal';
 
 const MyBlogs = () => {
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
   const { user } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [currentAction, setCurrentAction] = useState(null);
   const [selectedBlogId, setSelectedBlogId] = useState(null);
-  const navigate = useNavigate();
+  const [selectedBlogData, setSelectedBlogData] = useState(null);
 
   const fetchBlogs = async () => {
     if (!user?.email) return [];
@@ -26,8 +27,8 @@ const MyBlogs = () => {
   };
 
   // Query to fetch blogs
-  const { data: blogs, } = useQuery({
-    queryKey: ['blogs', user?.email],
+  const { data: blogs } = useQuery({
+    queryKey: ["blogs", user?.email],
     queryFn: fetchBlogs,
     enabled: !!user?.email,
   });
@@ -38,25 +39,22 @@ const MyBlogs = () => {
       await axiosSecure.delete(`/blogdelet/${blogId}`);
     },
     onMutate: async (blogId) => {
-      // Optimistically update the UI
-      await queryClient.cancelQueries(['blogs', user?.email]);
+      await queryClient.cancelQueries(["blogs", user?.email]);
 
-      const previousBlogs = queryClient.getQueryData(['blogs', user?.email]);
+      const previousBlogs = queryClient.getQueryData(["blogs", user?.email]);
 
-      queryClient.setQueryData(['blogs', user?.email], (oldBlogs) =>
+      queryClient.setQueryData(["blogs", user?.email], (oldBlogs) =>
         oldBlogs.filter((blog) => blog._id !== blogId)
       );
 
       return { previousBlogs };
     },
     onError: (error, blogId, context) => {
-      // Rollback in case of an error
-      queryClient.setQueryData(['blogs', user?.email], context.previousBlogs);
+      queryClient.setQueryData(["blogs", user?.email], context.previousBlogs);
       toast.error("Error deleting blog.");
     },
     onSettled: () => {
-      // Refetch the query to ensure data consistency
-      queryClient.invalidateQueries(['blogs', user?.email]);
+      queryClient.invalidateQueries(["blogs", user?.email]);
       toast.success("Blog deleted successfully!");
     },
   });
@@ -65,30 +63,32 @@ const MyBlogs = () => {
     if (currentAction === "delete") {
       deleteBlogMutation.mutate(selectedBlogId);
     } else if (currentAction === "update") {
-      navigate(`/update-blog/${selectedBlogId}`);
+      setIsUpdateModalOpen(true);
     }
 
     setIsModalOpen(false);
   };
 
-  const openModal = (action, blogId) => {
+  const openModal = (action, blogId, blogData) => {
     setCurrentAction(action);
     setSelectedBlogId(blogId);
+    setSelectedBlogData(blogData || {}); // Ensure default empty object
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
+    setIsUpdateModalOpen(false); // Close update modal as well
     setCurrentAction(null);
     setSelectedBlogId(null);
+    setSelectedBlogData(null);
   };
 
-  
   return (
     <div className="p-4">
       <Breadcrumb pageName={"My Added Blogs"} />
 
-      {blogs ? (
+      {blogs && blogs.length > 0 ? (
         blogs.map((blog) => (
           <div
             key={blog._id}
@@ -112,16 +112,15 @@ const MyBlogs = () => {
 
             <div className="flex space-x-4">
               <button
-                onClick={() => openModal("update", blog._id)}
+                onClick={() => openModal("update", blog._id, blog)}
                 className="p-2 color1t hover:text-blue-800 transition-colors duration-300"
                 aria-label="Update Blog"
               >
-                <MdEditSquare size={25} />
+                <MdEditSquare size={20} />
               </button>
-
               <button
                 onClick={() => openModal("delete", blog._id)}
-                className="p-2 text-red-600 hover:text-red-800 transition-colors duration-300"
+                className="p-2 color1t hover:text-red-800 transition-colors duration-300"
                 aria-label="Delete Blog"
               >
                 <FaTrash size={20} />
@@ -129,20 +128,35 @@ const MyBlogs = () => {
             </div>
           </div>
         ))
-      ) :(
-        <EmptyState
-          message="You have no blogs added yet."
-          address="/addBlogs" // or any address you want to direct users to
-          label="Add a Blog"
-        />
-      ) }
+      ) : (
+        <EmptyState label={"Add Blogs"} address={"/addBlogs"} message={"You have no blogs added yet."} />
+      )}
 
-      <ConfirmationModal
-        isOpen={isModalOpen}
-        message={`Are you sure you want to ${currentAction} this blog?`}
-        onConfirm={handleConfirm}
-        onCancel={closeModal}
-      />
+      {/* Update Blog Modal */}
+      {isUpdateModalOpen && selectedBlogData && (
+        <UpdateBlogModal
+          isOpen={isUpdateModalOpen}
+          onClose={closeModal}
+          blogData={selectedBlogData}
+        />
+      )}
+
+      {/* Confirmation Modal */}
+      {isModalOpen && (
+        <ConfirmationModal
+          isOpen={isModalOpen}
+          onConfirm={handleConfirm}
+          onCancel={closeModal} // Correctly close modal on cancel
+          message={
+            currentAction === "delete"
+              ? "Are you sure you want to delete this blog?"
+              : "Are you sure you want to update this blog?"
+          }
+          confirmButtonText={
+            currentAction === "delete" ? "Delete" : "Update"
+          }
+        />
+      )}
     </div>
   );
 };
