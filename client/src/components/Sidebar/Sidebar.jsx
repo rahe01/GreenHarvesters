@@ -76,8 +76,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
           {/* My Added Blogs */}
           <li>
-            <Link to="/my-added-blogs">
-              <MenuItem label="My Added Blogs" address="/my-added-blogs" icon={BsFileEarmarkText} />
+            <Link to="myaddedblogs">
+              <MenuItem label="My Added Blogs" address="myaddedblogs" icon={BsFileEarmarkText} />
             </Link>
           </li>
 

@@ -18,6 +18,7 @@ import Shop from "../pages/Shop/Shop";
 import DefaultLayout from "../layouts/DefaultLayout";
 import Profile from "../pages/Dashboard/Common/Profile";
 import Calender from "../pages/Dashboard/Common/Calender";
+import MyBlogs from "../pages/Dashboard/Common/MyBlogs/MyBlogs";
 
 export const router = createBrowserRouter([
   {
@@ -97,6 +98,10 @@ export const router = createBrowserRouter([
       {
         path: 'calendar',
         element: <Calender></Calender>
+      },
+      {
+        path: 'myaddedblogs',
+        element: <MyBlogs></MyBlogs>
       }
     ]
   },

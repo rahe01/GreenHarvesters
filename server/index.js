@@ -285,6 +285,33 @@ async function run() {
       }
     });
 
+    // get blogs by email address
+
+    app.get("/getblogbyuser/:email", async (req, res) => {
+      const email = req.params.email;
+      try {
+        const blogs = await blosCollection.find({ userEmail: email }).toArray();
+        if (!blogs.length) {
+          res.status(404).send({ message: "No blogs found for this user" });
+        } else {
+          res.send(blogs);
+        }
+      } catch (error) {
+        res.status(500).send({ message: "An error occurred", error });
+      }
+    })
+
+    // delet blogs by id
+    app.delete('/blogdelet/:id', function(req, res) {
+      const id = new ObjectId(req.params.id);
+      blosCollection.deleteOne({ _id: id }, (err, result) => {
+        if (err) return res.send(500, err);
+        res.send(`Deleted ${result.deletedCount} blog.`);
+      });
+    })
+
+
+
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log(
