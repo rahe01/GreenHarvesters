@@ -1,16 +1,35 @@
-// components/Sidebar/index.js
 import { AiOutlineHome, AiOutlineUser, AiOutlineSetting } from 'react-icons/ai';
+import { MdOutlineFoodBank, MdOutlineManageAccounts, MdOutlineCalendarToday } from 'react-icons/md';
+import { BsFileEarmarkText } from 'react-icons/bs';
 import { GrLogout } from 'react-icons/gr';
+import { Link } from 'react-router-dom';
+import MenuItem from './Menu/MenuItem';
+import useAuth from '../../hooks/useAuth';
+import toast from 'react-hot-toast';
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
+
+  const {logOut} = useAuth()
+
+
+  const handleLogout = async () => {
+    try {
+      logOut();
+      toast.success("Logged Out Successfully");
+    } catch (error) {
+      toast.error("Failed to Logout");
+    }
+  };
   return (
     <div
-      className={`fixed inset-y-0 left-0 z-30 w-64 transform color2b dark:bg-gray-800 p-5 transition-transform ${
+      className={`fixed inset-y-0 left-0 z-30 w-64 transform bg-gray-800 text-white p-5 transition-transform ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
       } md:translate-x-0 md:static md:inset-0`}
     >
       <div className="flex justify-between items-center">
-        <h2 className="text-xl font-semibold dark:text-white">My Sidebar</h2>
+        <Link to={'/'}>
+        <img src="https://iili.io/d8XQyEQ.png" className='h-14' alt="" />
+        </Link>
         <button
           className="md:hidden"
           onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -20,29 +39,70 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       </div>
       <nav className="mt-5">
         <ul>
+          {/* Dashboard */}
           <li>
-            <a href="#" className="flex items-center gap-2 p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">
-              <AiOutlineHome />
-              Home
-            </a>
+            <Link to="/dashboard">
+              <MenuItem label="Dashboard" address="/dashboard" icon={AiOutlineHome} />
+            </Link>
           </li>
+
+          {/* Add Food */}
           <li>
-            <a href="#" className="flex items-center gap-2 p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">
-              <AiOutlineUser />
-              Profile
-            </a>
+            <Link to="/add-food">
+              <MenuItem label="Add Food" address="/add-food" icon={MdOutlineFoodBank} />
+            </Link>
           </li>
+
+          {/* Manage Users */}
           <li>
-            <a href="#" className="flex items-center gap-2 p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">
-              <AiOutlineSetting />
-              Settings
-            </a>
+            <Link to="/manage-users">
+              <MenuItem label="Manage Users" address="/manage-users" icon={MdOutlineManageAccounts} />
+            </Link>
           </li>
+
+          {/* Profile */}
           <li>
-            <a href="#" className="flex items-center gap-2 p-2 text-red-600 hover:bg-gray-100 dark:text-red-500 dark:hover:bg-gray-700">
+            <Link to="profile">
+              <MenuItem label="Profile" address="profile" icon={AiOutlineUser} />
+            </Link>
+          </li>
+
+          {/* Settings */}
+          <li>
+            <Link to="/settings">
+              <MenuItem label="Settings" address="/settings" icon={AiOutlineSetting} />
+            </Link>
+          </li>
+
+          {/* My Added Blogs */}
+          <li>
+            <Link to="/my-added-blogs">
+              <MenuItem label="My Added Blogs" address="/my-added-blogs" icon={BsFileEarmarkText} />
+            </Link>
+          </li>
+
+          {/* My Added Food */}
+          <li>
+            <Link to="/my-added-food">
+              <MenuItem label="My Added Food" address="/my-added-food" icon={MdOutlineFoodBank} />
+            </Link>
+          </li>
+
+          {/* Calendar */}
+          <li>
+            <Link to="calendar">
+              <MenuItem label="Calendar" address="calendar" icon={MdOutlineCalendarToday} />
+            </Link>
+          </li>
+
+          {/* Logout */}
+          <li>
+         <button className='w-full' onClick={handleLogout}>
+         <a href="#" className="flex items-center gap-2 p-2 text-red-600 hover:bg-gray-100 dark:hover:bg-gray-700">
               <GrLogout />
               Logout
             </a>
+         </button>
           </li>
         </ul>
       </nav>

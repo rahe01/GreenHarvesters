@@ -16,6 +16,8 @@ import PrivateRoute from "./PrivateRoute";
 import Blog from "../pages/Outlet/Blog/Blog";
 import Shop from "../pages/Shop/Shop";
 import DefaultLayout from "../layouts/DefaultLayout";
+import Profile from "../pages/Dashboard/Common/Profile";
+import Calender from "../pages/Dashboard/Common/Calender";
 
 export const router = createBrowserRouter([
   {
@@ -88,5 +90,14 @@ export const router = createBrowserRouter([
         <DefaultLayout></DefaultLayout>
       </PrivateRoute>
     ),
+    children: [
+      {path: 'profile',
+        element: <Profile></Profile>
+      },
+      {
+        path: 'calendar',
+        element: <Calender></Calender>
+      }
+    ]
   },
 ]);

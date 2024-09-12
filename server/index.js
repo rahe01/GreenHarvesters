@@ -110,6 +110,40 @@ async function run() {
         res.status(500).send({ message: "An error occurred", error });
       }
     });
+
+
+    // get all user
+
+    app.get("/users", async (req, res) => {
+      try {
+        const users = await userCollection.find().toArray();
+        res.send(users);
+      } catch (error) {
+        res.status(500).send({ message: "An error occurred", error });
+      }
+    })
+
+    // get userby email
+    app.get("/users/:email", async (req, res) => {
+      try {
+        const user = await userCollection.findOne({ email: req.params.email });
+        if (!user) {
+          res.status(404).send({ message: "User not found" });
+        } else {
+          res.send(user);
+        }
+      } catch (error) {
+        res.status(500).send({ message: "An error occurred", error });
+      }
+    });
+
+   
+
+
+
+
+
+
     // **********************We offer related api ****************
 
     // get offer

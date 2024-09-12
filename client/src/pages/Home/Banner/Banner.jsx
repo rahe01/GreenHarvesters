@@ -34,7 +34,7 @@ export function Banner() {
           </p>
           <div className="mt-6 flex items-center justify-evenly  space-x-4">
             <Button label="LearnMore" color="color1" />
-            <Button label="Contact Us" color="color2" />
+            <Button label="ContactUs" color="color2" />
           </div>
         </div>
       </div>
@@ -54,7 +54,7 @@ export function Banner() {
           </p>
           <div className="mt-6 flex items-center justify-evenly  space-x-4">
             <Button label="LearnMore" color="color1" />
-            <Button label="Contact Us" color="color2" />
+            <Button label="ContactUs" color="color2" />
           </div>
         </div>
       </div>
@@ -74,7 +74,7 @@ export function Banner() {
           </p>
           <div className="mt-6 flex items-center justify-evenly  space-x-4">
             <Button label="LearnMore" color="color1" />
-            <Button label="Contact Us" color="color2" />
+            <Button label="ContactUs" color="color2" />
           </div>
         </div>
       </div>
