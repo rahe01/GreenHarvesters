@@ -14,7 +14,7 @@ const DarkModeSwitcher = () => {
     <li>
       <label
         className={`relative m-0 block h-7 w-14 rounded-full ${
-          colorMode === 'dark' ? 'color2b' : 'color1b'
+          colorMode === 'dark' ? 'bg-yellow-300' : 'color1b'
         }`}
       >
         <input
