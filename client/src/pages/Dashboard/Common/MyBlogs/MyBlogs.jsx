@@ -8,6 +8,7 @@ import ConfirmationModal from "../../../../components/Shared/Modal/ConfirmationM
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import EmptyState from '../../../../components/Shared/EmptyState copy';
 
 const MyBlogs = () => {
   const axiosSecure = useAxiosSecure();
@@ -25,7 +26,7 @@ const MyBlogs = () => {
   };
 
   // Query to fetch blogs
-  const { data: blogs, isLoading, isError, error } = useQuery({
+  const { data: blogs, } = useQuery({
     queryKey: ['blogs', user?.email],
     queryFn: fetchBlogs,
     enabled: !!user?.email,
@@ -82,53 +83,59 @@ const MyBlogs = () => {
     setSelectedBlogId(null);
   };
 
-  if (isLoading) return <p>Loading blogs...</p>;
-  if (isError) return <p>Error loading blogs: {error.message}</p>;
-
+  
   return (
     <div className="p-4">
       <Breadcrumb pageName={"My Added Blogs"} />
 
-      {blogs.map((blog) => (
-        <div
-          key={blog._id}
-          className="flex flex-col md:flex-row items-center justify-between p-4 mb-4 bg-white shadow-md rounded-lg dark:bg-gray-800"
-        >
-          <div className="flex flex-col md:flex-row justify-center items-center mb-4 md:mb-0 w-full md:w-auto">
-            <img
-              src={blog.imgSrc}
-              alt={blog.title}
-              className="w-20 h-20 rounded-lg object-cover mr-4 mb-2 md:mb-0"
-            />
-            <div className="flex flex-col text-center md:text-left">
-              <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
-                {blog.title}
-              </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-300">
-                {blog.category}
-              </p>
+      {blogs ? (
+        blogs.map((blog) => (
+          <div
+            key={blog._id}
+            className="flex flex-col md:flex-row items-center justify-between p-4 mb-4 bg-white shadow-md rounded-lg dark:bg-gray-800"
+          >
+            <div className="flex flex-col md:flex-row justify-center items-center mb-4 md:mb-0 w-full md:w-auto">
+              <img
+                src={blog.imgSrc}
+                alt={blog.title}
+                className="w-20 h-20 rounded-lg object-cover mr-4 mb-2 md:mb-0"
+              />
+              <div className="flex flex-col text-center md:text-left">
+                <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
+                  {blog.title}
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-300">
+                  {blog.category}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex space-x-4">
+              <button
+                onClick={() => openModal("update", blog._id)}
+                className="p-2 color1t hover:text-blue-800 transition-colors duration-300"
+                aria-label="Update Blog"
+              >
+                <MdEditSquare size={25} />
+              </button>
+
+              <button
+                onClick={() => openModal("delete", blog._id)}
+                className="p-2 text-red-600 hover:text-red-800 transition-colors duration-300"
+                aria-label="Delete Blog"
+              >
+                <FaTrash size={20} />
+              </button>
             </div>
           </div>
-
-          <div className="flex space-x-4">
-            <button
-              onClick={() => openModal("update", blog._id)}
-              className="p-2 color1t hover:text-blue-800 transition-colors duration-300"
-              aria-label="Update Blog"
-            >
-              <MdEditSquare size={25} />
-            </button>
-
-            <button
-              onClick={() => openModal("delete", blog._id)}
-              className="p-2 text-red-600 hover:text-red-800 transition-colors duration-300"
-              aria-label="Delete Blog"
-            >
-              <FaTrash size={20} />
-            </button>
-          </div>
-        </div>
-      ))}
+        ))
+      ) :(
+        <EmptyState
+          message="You have no blogs added yet."
+          address="/addBlogs" // or any address you want to direct users to
+          label="Add a Blog"
+        />
+      ) }
 
       <ConfirmationModal
         isOpen={isModalOpen}
