@@ -74,15 +74,19 @@ export const router = createBrowserRouter([
           fetch(`${import.meta.env.VITE_API_URL}/getprojectbyid/${params.id}`),
       },
       {
-        path: '/shop',
-        element: <Shop></Shop>
-      }
+        path: "/shop",
+        element: <Shop></Shop>,
+      },
     ],
   },
   { path: "/login", element: <Login /> },
   { path: "/signup", element: <SignUp /> },
   {
-    path: '/dashboard',
-    element: <DefaultLayout></DefaultLayout>
-  }
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DefaultLayout></DefaultLayout>
+      </PrivateRoute>
+    ),
+  },
 ]);
