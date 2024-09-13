@@ -54,10 +54,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
           {/* Manage Users */}
           <li>
-            <Link to="/manage-users">
+            <Link to="manageusers">
               <MenuItem
                 label="Manage Users"
-                address="/manage-users"
+                address="manageusers"
                 icon={MdOutlineManageAccounts}
               />
             </Link>

@@ -137,6 +137,31 @@ async function run() {
       }
     });
 
+
+    // update role
+    // Update user role by user ID
+app.patch("/users/:id/role", async (req, res) => {
+  const userId = req.params.id;
+  const { role } = req.body;
+
+  try {
+    // Update the user's role in the database
+    const result = await userCollection.updateOne(
+      { _id: new ObjectId(userId) },
+      { $set: { role } }
+    );
+
+    if (result.modifiedCount === 0) {
+      return res.status(404).send({ message: "User not found or role unchanged" });
+    }
+
+    res.send({ message: "Role updated successfully" });
+  } catch (error) {
+    res.status(500).send({ message: "An error occurred", error });
+  }
+});
+
+
    
 
 

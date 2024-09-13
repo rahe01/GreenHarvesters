@@ -19,6 +19,7 @@ import DefaultLayout from "../layouts/DefaultLayout";
 import Profile from "../pages/Dashboard/Common/Profile";
 import Calender from "../pages/Dashboard/Common/Calender";
 import MyBlogs from "../pages/Dashboard/Common/MyBlogs/MyBlogs";
+import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
 
 export const router = createBrowserRouter([
   {
@@ -110,6 +111,10 @@ export const router = createBrowserRouter([
             <AddBlogs></AddBlogs>
           </PrivateRoute>
         ),
+      },
+      {
+        path: 'manageusers',
+        element: <ManageUsers></ManageUsers>
       }
     ]
   },
