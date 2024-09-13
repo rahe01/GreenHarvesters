@@ -4,6 +4,7 @@ import Title from "../../../components/Shared/Title/Title";
 import useAuth from "../../../hooks/useAuth";
 import toast from "react-hot-toast";
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { useNavigate } from "react-router-dom";
 
 const AddBlogs = () => {
   const [title, setTitle] = useState("");
@@ -12,6 +13,7 @@ const AddBlogs = () => {
   const [category, setCategory] = useState("");
   const auth = useAuth();
   const { user } = auth;
+  const navigate = useNavigate()
 
   // Destructure user information with fallback for undefined user
   const { email, displayName: name, photoURL: userImageUrl } = user || {};
@@ -49,6 +51,7 @@ const AddBlogs = () => {
         setImageUrl("");
         setCategory("");
         toast.success("Blog added successfully");
+        navigate('/blogs')
       } else {
         console.error("Failed to add blog:", response.data);
         toast.error("Failed to add blog");

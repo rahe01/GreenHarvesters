@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,} from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 import Title from "../../../components/Shared/Title/Title";
 import { Select, Option } from "@material-tailwind/react";
@@ -10,6 +10,7 @@ const Blogs = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const axiosSecure = useAxiosSecure();
+  
 
   // Fetch blogs from the backend
   useEffect(() => {
