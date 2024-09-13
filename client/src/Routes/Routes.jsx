@@ -21,6 +21,7 @@ import Calender from "../pages/Dashboard/Common/Calender";
 import MyBlogs from "../pages/Dashboard/Common/MyBlogs/MyBlogs";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
 import AddFood from "../pages/Dashboard/Saller/Food/AddFood";
+import MyaddFood from "../pages/Dashboard/Saller/Food/MyaddFood";
 
 export const router = createBrowserRouter([
   {
@@ -120,6 +121,10 @@ export const router = createBrowserRouter([
       {
         path: 'addfood',
         element: <AddFood></AddFood>
+      },
+      {
+        path: 'myaddfood',
+        element: <MyaddFood></MyaddFood>
       }
     ]
   },

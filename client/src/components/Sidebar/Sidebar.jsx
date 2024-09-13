@@ -76,10 +76,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
           {/* My Added Food */}
           <li>
-            <Link to="/my-added-food">
+            <Link to="myaddfood">
               <MenuItem
                 label="My Added Food"
-                address="/my-added-food"
+                address="myaddfood"
                 icon={MdOutlineFoodBank}
               />
             </Link>
