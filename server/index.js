@@ -373,7 +373,7 @@ app.patch("/users/:id/role", async (req, res) => {
 
    // Add a new food item
    app.post('/food', async (req, res) => {
-    const { name, category, price, imageLink, description, userEmail, userName, userPhotoURL } = req.body;
+    const { name, category, price, imageLink, description, userEmail, userName, userPhotoURL ,status} = req.body;
 
     // Validate input
     if (!name || !category || !price || !imageLink || !description || !userEmail || !userName || !userPhotoURL) {
@@ -386,6 +386,7 @@ app.patch("/users/:id/role", async (req, res) => {
         price,
         imageLink,
         description,
+        status,
         userEmail,
         userName,
         userPhotoURL,
