@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Input, Select, Option, Button, Textarea } from "@material-tailwind/react";
-import Title from "../../../components/Shared/Title/Title";
+import { useLocation, useNavigate } from "react-router-dom"; // Import useLocation
 import useAuth from "../../../hooks/useAuth";
 import toast from "react-hot-toast";
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
-import { useNavigate } from "react-router-dom";
+import Breadcrumb from "../../../components/Breadcrumb/Breadcrumb";
+import Title from "../../../components/Shared/Title/Title";
 
 const AddBlogs = () => {
   const [title, setTitle] = useState("");
@@ -13,7 +14,8 @@ const AddBlogs = () => {
   const [category, setCategory] = useState("");
   const auth = useAuth();
   const { user } = auth;
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const location = useLocation(); // Get the current route location
 
   // Destructure user information with fallback for undefined user
   const { email, displayName: name, photoURL: userImageUrl } = user || {};
@@ -51,7 +53,7 @@ const AddBlogs = () => {
         setImageUrl("");
         setCategory("");
         toast.success("Blog added successfully");
-        navigate('/blogs')
+        navigate('/blogs');
       } else {
         console.error("Failed to add blog:", response.data);
         toast.error("Failed to add blog");
@@ -64,7 +66,12 @@ const AddBlogs = () => {
 
   return (
     <div>
-      <Title title="Add New Blog" />
+      {/* Conditionally render Title or Breadcrumb based on the current route */}
+      {location.pathname === "/dashboard/addBlogs" ? (
+        <Breadcrumb pageName="Add Blogs" />
+      ) : (
+        <Title title="Add New Blog" />
+      )}
       <div className="p-6 max-w-3xl mx-auto bg-white shadow-lg rounded-lg">
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Title Input */}

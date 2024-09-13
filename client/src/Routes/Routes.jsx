@@ -102,6 +102,14 @@ export const router = createBrowserRouter([
       {
         path: 'myaddedblogs',
         element: <MyBlogs></MyBlogs>
+      },
+      {
+        path: 'addBlogs',
+        element: (
+          <PrivateRoute>
+            <AddBlogs></AddBlogs>
+          </PrivateRoute>
+        ),
       }
     ]
   },
