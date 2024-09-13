@@ -96,8 +96,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             </Link>
           </li>
 
-               {/* My Added Blogs */}
-               <li>
+          {/* My Added Blogs */}
+          <li>
             <Link to="myaddedblogs">
               <MenuItem
                 label="My Added Blogs"
@@ -128,8 +128,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               />
             </Link>
           </li>
-
-     
 
           {/* Calendar */}
           <li>

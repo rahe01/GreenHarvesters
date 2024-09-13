@@ -95,19 +95,17 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
-      {path: 'profile',
-        element: <Profile></Profile>
+      { path: "profile", element: <Profile></Profile> },
+      {
+        path: "calendar",
+        element: <Calender></Calender>,
       },
       {
-        path: 'calendar',
-        element: <Calender></Calender>
+        path: "myaddedblogs",
+        element: <MyBlogs></MyBlogs>,
       },
       {
-        path: 'myaddedblogs',
-        element: <MyBlogs></MyBlogs>
-      },
-      {
-        path: 'addBlogs',
+        path: "addBlogs",
         element: (
           <PrivateRoute>
             <AddBlogs></AddBlogs>
@@ -115,17 +113,17 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'manageusers',
-        element: <ManageUsers></ManageUsers>
+        path: "manageusers",
+        element: <ManageUsers></ManageUsers>,
       },
       {
-        path: 'addfood',
-        element: <AddFood></AddFood>
+        path: "addfood",
+        element: <AddFood></AddFood>,
       },
       {
-        path: 'myaddfood',
-        element: <MyaddFood></MyaddFood>
-      }
-    ]
+        path: "myaddfood",
+        element: <MyaddFood></MyaddFood>,
+      },
+    ],
   },
 ]);
