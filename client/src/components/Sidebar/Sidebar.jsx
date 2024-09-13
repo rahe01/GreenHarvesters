@@ -65,10 +65,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
           {/* Add Food */}
           <li>
-            <Link to="/add-food">
+            <Link to="addfood">
               <MenuItem
                 label="Add Food"
-                address="/add-food"
+                address="addfood"
                 icon={MdOutlineFoodBank}
               />
             </Link>

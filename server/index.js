@@ -52,6 +52,7 @@ async function run() {
     const weofferCollection = client.db("GreenHarvest").collection("Offer");
     const projectCollection = client.db("GreenHarvest").collection("Projects");
     const blosCollection = client.db("GreenHarvest").collection("blogs");
+    const foodCollection = client.db("GreenHarvest").collection("Food")
 
     // auth related api
     app.post("/jwt", async (req, res) => {
@@ -362,6 +363,54 @@ app.patch("/users/:id/role", async (req, res) => {
         res.status(500).send({ message: "An error occurred", error });
       }
     })
+
+    
+
+
+
+    // *********************************food related functions*******************************
+    // add food
+
+   // Add a new food item
+   app.post('/food', async (req, res) => {
+    const { name, category, price, imageLink, description, userEmail, userName, userPhotoURL } = req.body;
+
+    // Validate input
+    if (!name || !category || !price || !imageLink || !description || !userEmail || !userName || !userPhotoURL) {
+        return res.status(400).json({ message: "All fields are required." });
+    }
+
+    const newFood = {
+        name,
+        category,
+        price,
+        imageLink,
+        description,
+        userEmail,
+        userName,
+        userPhotoURL,
+        createdAt: new Date().toISOString(),
+    };
+
+    try {
+        const result = await foodCollection.insertOne(newFood);
+
+        // Check if insertion was successful
+        if (result.acknowledged) {
+            res.status(201).json({ message: "Food item added successfully!", food: newFood });
+        } else {
+            res.status(500).json({ message: "Failed to add food item to the database." });
+        }
+    } catch (error) {
+        console.error("Error adding food item:", error);
+        res.status(500).json({ message: "An error occurred while adding the food item." });
+    }
+});
+
+
+
+
+
 
 
 
