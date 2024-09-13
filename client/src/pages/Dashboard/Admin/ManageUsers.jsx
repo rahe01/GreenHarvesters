@@ -75,6 +75,7 @@ const ManageUsers = () => {
                   setSelectedRole((prev) => ({ ...prev, [user._id]: value }))
                 }
                 className="w-full sm:w-40"
+                disabled={user.email === "raheahmed009@gmail.com"} 
               >
                 <Option value="Farmer">Farmer</Option>
                 <Option value="Admin">Admin</Option>
@@ -84,6 +85,7 @@ const ManageUsers = () => {
               {/* Update Role Button */}
               <Button
                 onClick={() => handleRoleUpdate(user._id)}
+                disabled={user.email === "raheahmed009@gmail.com"} 
                 className="w-full sm:w-auto px-4 py-2 text-black font-semibold rounded-3xl color1b"
               >
                 Update Role
