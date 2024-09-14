@@ -2,7 +2,8 @@
 const MyaddFood = () => {
     return (
         <div>
-            my
+            <title></title>
+            my adsfsdf
         </div>
     );
 };
