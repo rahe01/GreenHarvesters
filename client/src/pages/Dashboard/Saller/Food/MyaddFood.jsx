@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import useAuth from '../../../../hooks/useAuth';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 // Importing icons
-import { FaTrash, FaPause } from 'react-icons/fa';
+import { FaTrash, FaPause, FaPlay } from 'react-icons/fa';
 import { format } from 'date-fns'; // Import date formatting library
 import EmptyState from '../../../../components/Shared/EmptyState copy';
 import toast from 'react-hot-toast';
@@ -99,7 +99,9 @@ const MyAddFood = () => {
                                     className="p-2 color1t hover:text-yellow-800 transition-colors duration-300"
                                     aria-label="Pause/Resume Food"
                                 >
-                                    <FaPause size={20} />
+                                    {food.status === 'available' ? (<FaPause size={20} />) : ( <FaPlay color='red' />) }
+                                    
+                                   
                                 </button>
                                 <button
                                     onClick={() => handleDelete(food._id)}
