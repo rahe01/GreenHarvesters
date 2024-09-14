@@ -52,7 +52,7 @@ async function run() {
     const weofferCollection = client.db("GreenHarvest").collection("Offer");
     const projectCollection = client.db("GreenHarvest").collection("Projects");
     const blosCollection = client.db("GreenHarvest").collection("blogs");
-    const foodCollection = client.db("GreenHarvest").collection("Food")
+    const foodCollection = client.db("GreenHarvest").collection("Food");
 
     // auth related api
     app.post("/jwt", async (req, res) => {
@@ -112,7 +112,6 @@ async function run() {
       }
     });
 
-
     // get all user
 
     app.get("/users", async (req, res) => {
@@ -122,7 +121,7 @@ async function run() {
       } catch (error) {
         res.status(500).send({ message: "An error occurred", error });
       }
-    })
+    });
 
     // get userby email
     app.get("/users/:email", async (req, res) => {
@@ -138,37 +137,30 @@ async function run() {
       }
     });
 
-
     // update role
     // Update user role by user ID
-app.patch("/users/:id/role", async (req, res) => {
-  const userId = req.params.id;
-  const { role } = req.body;
+    app.patch("/users/:id/role", async (req, res) => {
+      const userId = req.params.id;
+      const { role } = req.body;
 
-  try {
-    // Update the user's role in the database
-    const result = await userCollection.updateOne(
-      { _id: new ObjectId(userId) },
-      { $set: { role } }
-    );
+      try {
+        // Update the user's role in the database
+        const result = await userCollection.updateOne(
+          { _id: new ObjectId(userId) },
+          { $set: { role } }
+        );
 
-    if (result.modifiedCount === 0) {
-      return res.status(404).send({ message: "User not found or role unchanged" });
-    }
+        if (result.modifiedCount === 0) {
+          return res
+            .status(404)
+            .send({ message: "User not found or role unchanged" });
+        }
 
-    res.send({ message: "Role updated successfully" });
-  } catch (error) {
-    res.status(500).send({ message: "An error occurred", error });
-  }
-});
-
-
-   
-
-
-
-
-
+        res.send({ message: "Role updated successfully" });
+      } catch (error) {
+        res.status(500).send({ message: "An error occurred", error });
+      }
+    });
 
     // **********************We offer related api ****************
 
@@ -325,21 +317,21 @@ app.patch("/users/:id/role", async (req, res) => {
       } catch (error) {
         res.status(500).send({ message: "An error occurred", error });
       }
-    })
+    });
 
     // delet blogs by id
-    app.delete('/blogdelet/:id', function(req, res) {
+    app.delete("/blogdelet/:id", function (req, res) {
       const id = new ObjectId(req.params.id);
       blosCollection.deleteOne({ _id: id }, (err, result) => {
         if (err) return res.send(500, err);
         res.send(`Deleted ${result.deletedCount} blog.`);
       });
-    })
+    });
 
     // update blogs
-    app.put('/updateblog/:id', async (req, res) => {
+    app.put("/updateblog/:id", async (req, res) => {
       const id = new ObjectId(req.params.id);
-      const { title, description, imgSrc, category} = req.body;
+      const { title, description, imgSrc, category } = req.body;
       const updatedBlog = {
         title,
         description,
@@ -362,25 +354,40 @@ app.patch("/users/:id/role", async (req, res) => {
       } catch (error) {
         res.status(500).send({ message: "An error occurred", error });
       }
-    })
-
-    
-
-
+    });
 
     // *********************************food related functions*******************************
     // add food
 
-   // Add a new food item
-   app.post('/food', async (req, res) => {
-    const { name, category, price, imageLink, description, userEmail, userName, userPhotoURL ,status} = req.body;
+    // Add a new food item
+    app.post("/food", async (req, res) => {
+      const {
+        name,
+        category,
+        price,
+        imageLink,
+        description,
+        userEmail,
+        userName,
+        userPhotoURL,
+        status,
+      } = req.body;
 
-    // Validate input
-    if (!name || !category || !price || !imageLink || !description || !userEmail || !userName || !userPhotoURL) {
+      // Validate input
+      if (
+        !name ||
+        !category ||
+        !price ||
+        !imageLink ||
+        !description ||
+        !userEmail ||
+        !userName ||
+        !userPhotoURL
+      ) {
         return res.status(400).json({ message: "All fields are required." });
-    }
+      }
 
-    const newFood = {
+      const newFood = {
         name,
         category,
         price,
@@ -391,24 +398,55 @@ app.patch("/users/:id/role", async (req, res) => {
         userName,
         userPhotoURL,
         createdAt: new Date().toISOString(),
-    };
+      };
 
-    try {
+      try {
         const result = await foodCollection.insertOne(newFood);
 
         // Check if insertion was successful
         if (result.acknowledged) {
-            res.status(201).json({ message: "Food item added successfully!", food: newFood });
+          res
+            .status(201)
+            .json({ message: "Food item added successfully!", food: newFood });
         } else {
-            res.status(500).json({ message: "Failed to add food item to the database." });
+          res
+            .status(500)
+            .json({ message: "Failed to add food item to the database." });
         }
-    } catch (error) {
+      } catch (error) {
         console.error("Error adding food item:", error);
-        res.status(500).json({ message: "An error occurred while adding the food item." });
-    }
-});
+        res
+          .status(500)
+          .json({ message: "An error occurred while adding the food item." });
+      }
+    });
 
+    // get food by email address
+    app.get("/food/user/:email", async (req, res) => {
+      const email = req.params.email;
+      try {
+        const food = await foodCollection.find({ userEmail: email }).toArray();
+        if (!food.length) {
+          res.status(404).send({ message: "No food items found for this user" });
+        } else {
+          res.send(food);
+        }
+      } catch (error) {
+        res.status(500).send({ message: "An error occurred", error });
+      }
+    });
 
+    // get all food items
+    app.get("/foods", async (req, res) => {
+      try {
+        const food = await foodCollection.find().toArray();
+        res.send(food);
+      } catch (error) {
+        res.status(500).send({ message: "An error occurred", error });
+      }
+    });
+
+    // get
 
 
 
