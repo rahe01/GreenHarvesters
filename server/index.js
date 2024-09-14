@@ -446,7 +446,44 @@ async function run() {
       }
     });
 
-    // get
+    // food delet by id
+    app.delete('/fooddelete/:id' , async (req, res) => {
+      const id = new ObjectId(req.params.id);
+      await foodCollection.deleteOne({ _id: id });
+      res.send(`Deleted food item with id: ${id}`);
+    })
+
+// food status change
+app.patch('/foodtoggle/:id', async (req, res) => {
+  const id = new ObjectId(req.params.id); // Convert the ID to an ObjectId
+  try {
+    // Find the current food item
+    const food = await foodCollection.findOne({ _id: id });
+    if (!food) {
+      return res.status(404).json({ message: 'Food not found' });
+    }
+
+    // Toggle status between 'paused' and 'available'
+    const newStatus = food.status === 'available' ? 'paused' : 'available';
+
+    // Update food item with the new status
+    const result = await foodCollection.updateOne(
+      { _id: id },
+      { $set: { status: newStatus } }
+    );
+
+    if (result.modifiedCount === 0) {
+      return res.status(400).json({ message: 'Failed to update food status' });
+    }
+
+    // Return the updated food item
+    const updatedFood = await foodCollection.findOne({ _id: id });
+    res.json(updatedFood);
+  } catch (error) {
+    console.error('Error updating food status:', error);
+    res.status(500).json({ message: 'Failed to toggle food status' });
+  }
+});
 
 
 
