@@ -501,6 +501,25 @@ async function run() {
     })
 
 
+    // get food by id
+    app.get("/foodid/:id", async (req, res) => {
+      const id = new ObjectId(req.params.id);
+      try {
+        const food = await foodCollection.findOne({ _id: id });
+        if (!food) {
+          return res.status(404).json({ message: "Food not found" });
+        }
+        res.send(food);
+      } catch (error) {
+        console.error("Error getting food item:", error);
+        res.status(500).json({ message: "An error occurred while getting the food item." });
+      }
+    });
+
+    // update food
+   
+
+
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });

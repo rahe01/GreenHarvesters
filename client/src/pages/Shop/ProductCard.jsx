@@ -1,10 +1,15 @@
 import Button from "../../components/Shared/Button/Button";
-
-
+import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
+    const navigate = useNavigate();
+
+    const handleViewDetails = () => {
+        navigate(`/productdetails/${product._id}`);
+    };
+
     return (
-        <div key={product.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div key={product._id} className="bg-white rounded-lg shadow-lg overflow-hidden">
             <img
                 src={product.imageLink}
                 alt={product.name}
@@ -19,7 +24,7 @@ const ProductCard = ({ product }) => {
                             <input
                                 key={index}
                                 type="radio"
-                                name={`rating-${product.id}`}
+                                name={`rating-${product._id}`}
                                 className="mask mask-star-2 bg-orange-400"
                                 checked={index < product.rating}
                                 readOnly
@@ -27,7 +32,7 @@ const ProductCard = ({ product }) => {
                         ))}
                     </div>
                 </div>
-                <Button label={"View Details"} />
+                <Button onClick={handleViewDetails} label={"View Details"} />
             </div>
         </div>
     );

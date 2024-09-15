@@ -22,6 +22,7 @@ import MyBlogs from "../pages/Dashboard/Common/MyBlogs/MyBlogs";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
 import AddFood from "../pages/Dashboard/Saller/Food/AddFood";
 import MyaddFood from "../pages/Dashboard/Saller/Food/MyaddFood";
+import ProductDetails from "../pages/Shop/ProductDetails";
 
 export const router = createBrowserRouter([
   {
@@ -83,6 +84,11 @@ export const router = createBrowserRouter([
         path: "/shop",
         element: <Shop></Shop>,
       },
+      {
+        path: '/productdetails/:id',
+        element: <ProductDetails></ProductDetails>,
+        loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/foodid/${params.id}`)
+      }
     ],
   },
   { path: "/login", element: <Login /> },
@@ -124,6 +130,7 @@ export const router = createBrowserRouter([
         path: "myaddfood",
         element: <MyaddFood></MyaddFood>,
       },
+    
     ],
   },
 ]);
