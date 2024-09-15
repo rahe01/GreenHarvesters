@@ -6,7 +6,7 @@ const ProductCard = ({ product }) => {
     return (
         <div key={product.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
             <img
-                src={product.image}
+                src={product.imageLink}
                 alt={product.name}
                 className="w-full h-48 object-cover"
             />
