@@ -521,9 +521,9 @@ async function run() {
 
     // add to cart
 
-    app.post('/cartadd' , async (req, res) => {
-      const {foodName, totalPrice, userName, userEmail,foodImage} = req.body;
-      try{
+    app.post("/cartadd", async (req, res) => {
+      const { foodName, totalPrice, userName, userEmail, foodImage } = req.body;
+      try {
         const newCartItem = {
           foodName,
           totalPrice,
@@ -533,31 +533,25 @@ async function run() {
         };
 
         const result = await cartCollection.insertOne(newCartItem);
-        if(result.acknowledged){
-          res.status(201).json({message: 'Cart item added successfully!', cartItem: newCartItem});
+        if (result.acknowledged) {
+          res
+            .status(201)
+            .json({
+              message: "Cart item added successfully!",
+              cartItem: newCartItem,
+            });
         } else {
-          res.status(500).json({message: 'Failed to add cart item to the database.'});
+          res
+            .status(500)
+            .json({ message: "Failed to add cart item to the database." });
         }
-      }
-      catch(error){
+      } catch (error) {
         console.error("Error adding cart item:", error);
-        res.status(500).json({message: 'An error occurred while adding the cart item.'});
+        res
+          .status(500)
+          .json({ message: "An error occurred while adding the cart item." });
       }
-    })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    });
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });

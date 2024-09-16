@@ -2,9 +2,9 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Title from "../../components/Shared/Title/Title";
 import Button from "../../components/Shared/Button/Button";
-import useAuth from './../../hooks/useAuth';
+import useAuth from "./../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { toast } from 'react-hot-toast';
+import { toast } from "react-hot-toast";
 
 const ProductDetails = () => {
   const product = useLoaderData();
@@ -20,11 +20,14 @@ const ProductDetails = () => {
   }
 
   // Format the date for product creation
-  const formattedDate = new Date(product.createdAt).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  const formattedDate = new Date(product.createdAt).toLocaleDateString(
+    "en-US",
+    {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }
+  );
 
   // Handle adding item to cart
   const handleAddToCart = async () => {
@@ -39,18 +42,20 @@ const ProductDetails = () => {
       };
 
       // Make a secure request to add to cart
-      const response = await axiosSecure.post('/cartadd', cartItem);
+      const response = await axiosSecure.post("/cartadd", cartItem);
 
       // Check for successful response
       if (response && response.data && response.status === 201) {
-        toast.success(`${product.name} added to cart with quantity ${quantity}`);
+        toast.success(
+          `${product.name} added to cart with quantity ${quantity}kilo`
+        );
       } else {
-        console.error('Failed to add to cart:', response);
-        toast.error('There was a problem adding this item to the cart.');
+        console.error("Failed to add to cart:", response);
+        toast.error("There was a problem adding this item to the cart.");
       }
     } catch (error) {
-      console.error('Error adding to cart:', error);
-      toast.error('An error occurred while adding the item to the cart.');
+      console.error("Error adding to cart:", error);
+      toast.error("An error occurred while adding the item to the cart.");
     }
   };
 
@@ -127,7 +132,13 @@ const ProductDetails = () => {
                     fill="none"
                     viewBox="0 0 18 2"
                   >
-                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h16" />
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M1 1h16"
+                    />
                   </svg>
                 </button>
                 <input
@@ -149,13 +160,22 @@ const ProductDetails = () => {
                     fill="none"
                     viewBox="0 0 18 18"
                   >
-                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 1v16M1 9h16" />
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M9 1v16M1 9h16"
+                    />
                   </svg>
                 </button>
               </div>
             </div>
 
-            <button className="btn color1b mt-2 lg:mt-0 transition-transform transform hover:scale-105 duration-300" onClick={handleAddToCart}>
+            <button
+              className="btn color1b mt-2 lg:mt-0 transition-transform transform hover:scale-105 duration-300"
+              onClick={handleAddToCart}
+            >
               Add to Cart
             </button>
           </div>

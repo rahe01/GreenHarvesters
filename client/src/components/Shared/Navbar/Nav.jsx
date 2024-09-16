@@ -1,11 +1,10 @@
 import { useState } from "react";
-
-import useAuth from "./../../../hooks/useAuth";
-import "@fortawesome/fontawesome-free/css/all.min.css";
-import { toast } from "react-hot-toast";
+import {  FaOpencart, FaSignInAlt, FaUserPlus } from "react-icons/fa"; // Import the cart icon
+import useAuth from "../../../hooks/useAuth";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
-import NavLinkk from "../Link/NavLinkk";
-import { FaSignInAlt, FaUserPlus } from "react-icons/fa";
+import NavLinkk from './../Link/NavLinkk';
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const Nav = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -42,10 +41,21 @@ const Nav = () => {
           />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"></span>
         </a>
+       
         <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+          {/* Updated Cart Icon with Badge */}
+          <Link to="/dashboard/cart">
+            <button className="btn btn-ghost btn-circle">
+              <div className="indicator">
+                <FaOpencart className="h-6 w-6 text-green-500" />
+                <span className="badge badge-xs  indicator-item">1</span>
+              </div>
+            </button>
+          </Link>
+
           <button
             type="button"
-            className="flex text-sm bg-white rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 ml-28"
+            className="flex text-sm bg-white rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 ml-48"
             id="user-menu-button"
             aria-expanded={isDropdownOpen ? "true" : "false"}
             onClick={toggleDropdown}
@@ -77,14 +87,12 @@ const Nav = () => {
               {user ? (
                 <>
                   <li>
-                  <Link to={'/dashboard'}>
-                  <a
-                      
-                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                    >
-                      <i className="fas fa-tachometer-alt mr-2"></i>
-                      Dashboard
-                    </a></Link>
+                    <Link to={'/dashboard'}>
+                      <a className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                        <i className="fas fa-tachometer-alt mr-2"></i>
+                        Dashboard
+                      </a>
+                    </Link>
                   </li>
                   <li>
                     <a
@@ -120,24 +128,22 @@ const Nav = () => {
                     className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                     to={"/login"}
                   >
-                    <FaSignInAlt className="mr-2" />{" "}
-                    {/* FontAwesome icon for Log In */}
-                    Log In
+                    <FaSignInAlt className="mr-2" /> Log In
                   </Link>
 
                   <Link
                     className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                     to={"/signup"}
                   >
-                    <FaUserPlus className="mr-2" />{" "}
-                    {/* FontAwesome icon for Sign Up */}
-                    Sign Up
+                    <FaUserPlus className="mr-2" /> Sign Up
                   </Link>
                 </>
               )}
             </ul>
           </div>
         </div>
+
+        {/* Mobile Menu Button */}
         <button
           data-collapse-toggle="navbar-user"
           type="button"
@@ -157,6 +163,7 @@ const Nav = () => {
             <path stroke="currentColor" d="M1 1h15M1 7h15M1 13h15" />
           </svg>
         </button>
+
         <div
           className={`items-center justify-between ${
             isDropdownOpen1 ? "block" : "hidden"

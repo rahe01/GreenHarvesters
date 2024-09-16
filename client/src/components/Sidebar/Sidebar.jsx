@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import MenuItem from "./Menu/MenuItem";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
+import { FaOpencart } from "react-icons/fa";
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const { logOut } = useAuth();
@@ -103,6 +104,15 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 label="My Added Blogs"
                 address="myaddedblogs"
                 icon={BsFileEarmarkText}
+              />
+            </Link>
+          </li>
+          <li>
+            <Link to="mycart">
+              <MenuItem
+                label="My Cart"
+                address="mycart"
+                icon={FaOpencart}
               />
             </Link>
           </li>
