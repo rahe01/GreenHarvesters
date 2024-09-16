@@ -53,6 +53,7 @@ async function run() {
     const projectCollection = client.db("GreenHarvest").collection("Projects");
     const blosCollection = client.db("GreenHarvest").collection("blogs");
     const foodCollection = client.db("GreenHarvest").collection("Food");
+    const cartCollection = client.db("GreenHarvest").collection("cart");
 
     // auth related api
     app.post("/jwt", async (req, res) => {
@@ -490,16 +491,14 @@ async function run() {
     });
 
     // get all food
-    app.get('/allfood', async (req, res) => {
-      try{
+    app.get("/allfood", async (req, res) => {
+      try {
         const food = await foodCollection.find().toArray();
         res.send(food);
+      } catch (error) {
+        res.status(500).send({ message: "An error occurred", error });
       }
-      catch(error){
-        res.status(500).send({ message: 'An error occurred', error });
-      }
-    })
-
+    });
 
     // get food by id
     app.get("/foodid/:id", async (req, res) => {
@@ -512,12 +511,51 @@ async function run() {
         res.send(food);
       } catch (error) {
         console.error("Error getting food item:", error);
-        res.status(500).json({ message: "An error occurred while getting the food item." });
+        res
+          .status(500)
+          .json({ message: "An error occurred while getting the food item." });
       }
     });
 
-    // update food
-   
+    //  ******************************cart releted api ******************************
+
+    // add to cart
+
+    app.post('/cartadd' , async (req, res) => {
+      const {foodName, totalPrice, userName, userEmail,foodImage} = req.body;
+      try{
+        const newCartItem = {
+          foodName,
+          totalPrice,
+          foodImage,
+          userName,
+          userEmail,
+        };
+
+        const result = await cartCollection.insertOne(newCartItem);
+        if(result.acknowledged){
+          res.status(201).json({message: 'Cart item added successfully!', cartItem: newCartItem});
+        } else {
+          res.status(500).json({message: 'Failed to add cart item to the database.'});
+        }
+      }
+      catch(error){
+        console.error("Error adding cart item:", error);
+        res.status(500).json({message: 'An error occurred while adding the cart item.'});
+      }
+    })
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
