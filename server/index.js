@@ -522,7 +522,7 @@ async function run() {
     // add to cart
 
     app.post("/cartadd", async (req, res) => {
-      const { foodName, totalPrice, userName, userEmail, foodImage } = req.body;
+      const { foodName,quantity, totalPrice, userName, userEmail, foodImage } = req.body;
       try {
         const newCartItem = {
           foodName,
@@ -530,6 +530,7 @@ async function run() {
           foodImage,
           userName,
           userEmail,
+          quantity
         };
 
         const result = await cartCollection.insertOne(newCartItem);
@@ -552,6 +553,44 @@ async function run() {
           .json({ message: "An error occurred while adding the cart item." });
       }
     });
+
+
+    // get cart by email address
+    app.get("/cartbymail/:email", async (req, res) => {
+      const email = req.params.email;
+      try {
+        const cartItems = await cartCollection.find({ userEmail: email }).toArray();
+        if (!cartItems.length) {
+          res
+           .status(404)
+           .send({ message: "No cart items found for this user" });
+        } else {
+          res.send(cartItems);
+        }
+      } catch (error) {
+        res.status(500).send({ message: "An error occurred", error });
+      }
+    });
+
+    // delet cart item
+    app.delete("/cartdelete/:id", async (req, res) => {
+      const id = new ObjectId(req.params.id);
+      await cartCollection.deleteOne({ _id: id });
+      res.send(`Deleted cart item with id: ${id}`);
+    });
+
+    // update cart item quantity
+ 
+
+
+
+
+
+
+
+
+
+
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });

@@ -23,6 +23,7 @@ import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
 import AddFood from "../pages/Dashboard/Saller/Food/AddFood";
 import MyaddFood from "../pages/Dashboard/Saller/Food/MyaddFood";
 import ProductDetails from "../pages/Shop/ProductDetails";
+import MyCart from "../pages/Dashboard/User/Cart/MyCart";
 
 export const router = createBrowserRouter([
   {
@@ -130,6 +131,10 @@ export const router = createBrowserRouter([
         path: "myaddfood",
         element: <MyaddFood></MyaddFood>,
       },
+      {
+        path: 'mycart',
+        element: <MyCart></MyCart>
+      }
     
     ],
   },

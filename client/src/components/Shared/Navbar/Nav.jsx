@@ -5,10 +5,12 @@ import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import NavLinkk from './../Link/NavLinkk';
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import useCart from "../../../hooks/useCart";
 
 const Nav = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownOpen1, setIsDropdownOpen1] = useState(false);
+  const {cartItems} = useCart()
 
   const { user, logOut } = useAuth(); // Access user directly
   const { photoURL, email, displayName } = user || {}; // Ensure user is defined
@@ -44,11 +46,11 @@ const Nav = () => {
        
         <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
           {/* Updated Cart Icon with Badge */}
-          <Link to="/dashboard/cart">
+          <Link to="/dashboard/mycart">
             <button className="btn btn-ghost btn-circle">
               <div className="indicator">
                 <FaOpencart className="h-6 w-6 text-green-500" />
-                <span className="badge badge-xs  indicator-item">1</span>
+                <span className="badge badge-xs  indicator-item">{cartItems.length || 0}</span>
               </div>
             </button>
           </Link>

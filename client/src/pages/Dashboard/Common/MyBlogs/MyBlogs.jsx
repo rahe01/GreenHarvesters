@@ -1,5 +1,5 @@
 import { useState } from "react";
-import EmptyState from "../../../../components/Shared/EmptyState copy";
+import EmptyState from "../../../../components/Shared/EmptyState";
 import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import UpdateBlogModal from "./UpdateBlogModal";

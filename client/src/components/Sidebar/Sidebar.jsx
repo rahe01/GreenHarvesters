@@ -109,11 +109,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
           </li>
           <li>
             <Link to="mycart">
-              <MenuItem
-                label="My Cart"
-                address="mycart"
-                icon={FaOpencart}
-              />
+              <MenuItem label="My Cart" address="mycart" icon={FaOpencart} />
             </Link>
           </li>
 
