@@ -1,4 +1,4 @@
-import { AiOutlineHome, AiOutlineUser, AiOutlineSetting } from "react-icons/ai";
+import { AiOutlineHome, AiOutlineUser,} from "react-icons/ai";
 import {
   MdOutlineFoodBank,
   MdOutlineManageAccounts,
@@ -124,16 +124,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             </Link>
           </li>
 
-          {/* Settings */}
-          <li>
-            <Link to="/settings">
-              <MenuItem
-                label="Settings"
-                address="/settings"
-                icon={AiOutlineSetting}
-              />
-            </Link>
-          </li>
+      
 
           {/* Calendar */}
           <li>
