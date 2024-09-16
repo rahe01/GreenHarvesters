@@ -50,7 +50,7 @@ const ProductDetails = () => {
       }
     } catch (error) {
       console.error('Error adding to cart:', error);
-      alert('An error occurred while adding the item to the cart.');
+      toast.error('An error occurred while adding the item to the cart.');
     }
   };
 
@@ -68,11 +68,11 @@ const ProductDetails = () => {
     <div>
       <Title title={product.name}></Title>
       <div className="card lg:card-side bg-base-100 shadow-xl m-6 container mx-auto flex flex-col lg:flex-row">
-        <figure className="w-full lg:w-1/3">
+        <figure className="w-full lg:w-1/3 relative overflow-hidden transition-transform transform hover:scale-105 duration-300">
           <img
             src={product.imageLink}
             alt={product.name}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover transition-opacity duration-300 hover:opacity-90"
           />
         </figure>
         <div className="card-body w-full lg:w-2/3 p-6">
@@ -99,7 +99,7 @@ const ProductDetails = () => {
             <img
               src={product.userPhotoURL}
               alt={product.userName}
-              className="w-12 h-12 rounded-full mr-4"
+              className="w-12 h-12 rounded-full mr-4 transition-transform transform hover:scale-110 duration-300"
             />
             <div>
               <p className="font-medium">{product.userName}</p>
@@ -114,11 +114,11 @@ const ProductDetails = () => {
               <label htmlFor="quantity" className="font-medium">
                 Quantity by Kg:
               </label>
-              <div className="relative flex items-center max-w-[8rem]">
+              <div className="relative flex items-center justify-end max-w-[8rem]">
                 <button
                   type="button"
                   onClick={decrementQuantity}
-                  className="bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 focus:ring-2 focus:outline-none"
+                  className="bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 transition-colors duration-300 focus:ring-gray-100 focus:ring-2 focus:outline-none"
                 >
                   <svg
                     className="w-3 h-3 text-gray-900"
@@ -140,7 +140,7 @@ const ProductDetails = () => {
                 <button
                   type="button"
                   onClick={incrementQuantity}
-                  className="bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 focus:ring-2 focus:outline-none"
+                  className="bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 transition-colors duration-300 focus:ring-gray-100 focus:ring-2 focus:outline-none"
                 >
                   <svg
                     className="w-3 h-3 text-gray-900"
@@ -155,7 +155,7 @@ const ProductDetails = () => {
               </div>
             </div>
 
-            <button className="btn color1b mt-2 lg:mt-0" onClick={handleAddToCart}>
+            <button className="btn color1b mt-2 lg:mt-0 transition-transform transform hover:scale-105 duration-300" onClick={handleAddToCart}>
               Add to Cart
             </button>
           </div>
