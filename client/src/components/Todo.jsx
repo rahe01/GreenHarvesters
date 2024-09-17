@@ -85,9 +85,9 @@ const Todo = () => {
                 </ul>
             </div>
 
-            {/* Completed Todos List */}
+
             <div className="w-full max-w-md mt-8">
-                <h2 className="text-xl font-semibold mb-3">Completed Tasks</h2>
+              
                 <ul className="list-disc list-inside">
                     {completedTodos.length > 0 ? (
                         completedTodos.map((todo, index) => (
