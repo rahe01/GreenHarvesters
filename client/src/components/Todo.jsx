@@ -88,23 +88,7 @@ const Todo = () => {
 
             <div className="w-full max-w-md mt-8">
               
-                <ul className="list-disc list-inside">
-                    {completedTodos.length > 0 ? (
-                        completedTodos.map((todo, index) => (
-                            <li key={index} className="flex justify-between items-center mb-2">
-                                <span>{todo}</span>
-                                <button
-                                    onClick={() => deleteTodo(index, true)}
-                                    className="text-red-500 hover:text-red-700"
-                                >
-                                    Delete
-                                </button>
-                            </li>
-                        ))
-                    ) : (
-                        <p>No completed tasks</p>
-                    )}
-                </ul>
+                
             </div>
         </div>
     );
