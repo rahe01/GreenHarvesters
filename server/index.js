@@ -166,7 +166,7 @@ async function run() {
     // **********************We offer related api ****************
 
     // get offer
-    app.get("/getoffer", async (req, res) => {
+    app.get("/getoffer",  async (req, res) => {
       try {
         const offers = await weofferCollection.find().toArray();
         res.send(offers);
@@ -604,9 +604,9 @@ async function run() {
 run().catch(console.dir);
 
 app.get("/", (req, res) => {
-  res.send("Hello from StayVista Server..");
+  res.send("Hello from Green Harvests Server..");
 });
 
 app.listen(port, () => {
-  console.log(`StayVista is running on port ${port}`);
+  console.log(`Green Harvests is running on port ${port}`);
 });
