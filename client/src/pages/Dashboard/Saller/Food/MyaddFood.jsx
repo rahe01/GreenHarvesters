@@ -23,7 +23,7 @@ const MyAddFood = () => {
                 setFoods(sortedFoods);
             } catch (error) {
                 console.error('Error fetching food data:', error);
-                toast.error('Failed to fetch food data');
+
             }
         };
         if (user?.email) {
@@ -100,9 +100,9 @@ const MyAddFood = () => {
                                     className="p-2 color1t hover:text-yellow-800 transition-colors duration-300"
                                     aria-label="Pause/Resume Food"
                                 >
-                                    {food.status === 'available' ? (<FaPause size={20} />) : ( <FaPlay color='red' />) }
-                                    
-                                   
+                                    {food.status === 'available' ? (<FaPause size={20} />) : (<FaPlay color='red' />)}
+
+
                                 </button>
                                 <button
                                     onClick={() => handleDelete(food._id)}

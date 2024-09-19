@@ -11,9 +11,12 @@ import MenuItem from "./Menu/MenuItem";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import { FaOpencart } from "react-icons/fa";
+import useRole from "../../hooks/useRole";
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const { logOut } = useAuth();
+  const [role] = useRole()
+  console.log(role)
 
   const handleLogout = async () => {
     try {
@@ -54,37 +57,44 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
           </li>
 
           {/* Manage Users */}
-          <li>
-            <Link to="manageusers">
-              <MenuItem
-                label="Manage Users"
-                address="manageusers"
-                icon={MdOutlineManageAccounts}
-              />
-            </Link>
-          </li>
+         {role === "Admin" && (
+           <li>
+           <Link to="manageusers">
+             <MenuItem
+               label="Manage Users"
+               address="manageusers"
+               icon={MdOutlineManageAccounts}
+             />
+           </Link>
+         </li>
+         )}
 
-          {/* Add Food */}
-          <li>
-            <Link to="addfood">
-              <MenuItem
-                label="Add Food"
-                address="addfood"
-                icon={MdOutlineFoodBank}
-              />
-            </Link>
-          </li>
+     {role === "Seller" && (
+      <>
+           {/* Add Food */}
+           <li>
+           <Link to="addfood">
+             <MenuItem
+               label="Add Food"
+               address="addfood"
+               icon={MdOutlineFoodBank}
+             />
+           </Link>
+         </li>
 
-          {/* My Added Food */}
-          <li>
-            <Link to="myaddfood">
-              <MenuItem
-                label="My Added Food"
-                address="myaddfood"
-                icon={MdOutlineFoodBank}
-              />
-            </Link>
-          </li>
+         {/* My Added Food */}
+         <li>
+           <Link to="myaddfood">
+             <MenuItem
+               label="My Added Food"
+               address="myaddfood"
+               icon={MdOutlineFoodBank}
+             />
+           </Link>
+         </li>
+         </>
+      
+     )}
 
           {/* add blogs */}
           <li>
@@ -107,11 +117,15 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               />
             </Link>
           </li>
-          <li>
+        {
+          role === "Farmer" && (
+            <li>
             <Link to="mycart">
               <MenuItem label="My Cart" address="mycart" icon={FaOpencart} />
             </Link>
           </li>
+          )
+        }
 
           {/* Profile */}
           <li>

@@ -8,6 +8,7 @@ import EmptyState from "../../../../components/Shared/EmptyState";
 import toast from "react-hot-toast";
 import OrderModal from "./OrderModal";
 
+
 const MyCart = () => {
   const { cartItems, loading, handleDelete, handleCheck } = useCart();
   const [totalPrice, setTotalPrice] = useState(0); // State to track total price of checked items
@@ -15,6 +16,7 @@ const MyCart = () => {
   const [coupon, setCoupon] = useState(""); // State for coupon input
   const [isCouponApplied, setIsCouponApplied] = useState(false); // State to track if coupon is applied
   const [isModalOpen, setIsModalOpen] = useState(false); // State to manage modal visibility
+
 
   // Function to calculate the total price of checked items
   useEffect(() => {

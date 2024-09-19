@@ -5,6 +5,7 @@ import Button from "../../components/Shared/Button/Button";
 import useAuth from "./../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { toast } from "react-hot-toast";
+import useRole from './../../hooks/useRole';
 
 const ProductDetails = () => {
   const product = useLoaderData();
@@ -13,6 +14,7 @@ const ProductDetails = () => {
   const auth = useAuth();
   const { user } = auth;
   const axiosSecure = useAxiosSecure();
+  const [role] = useRole()
 
   // Handle case where product is not available
   if (!product) {
@@ -175,6 +177,7 @@ const ProductDetails = () => {
             <button
               className="btn color1b mt-2 lg:mt-0 transition-transform transform hover:scale-105 duration-300"
               onClick={handleAddToCart}
+              disabled={role === "Admin" || product.status === "paused" || role === "Seller"}
             >
               Add to Cart
             </button>
