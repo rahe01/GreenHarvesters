@@ -24,6 +24,9 @@ import AddFood from "../pages/Dashboard/Saller/Food/AddFood";
 import MyaddFood from "../pages/Dashboard/Saller/Food/MyaddFood";
 import ProductDetails from "../pages/Shop/ProductDetails";
 import MyCart from "../pages/Dashboard/User/Cart/MyCart";
+import AdminRoute from "./AdminRoute";
+import SellerRoute from "./SellerRoute";
+import FarmerRoute from "./FarmerRoute";
 
 export const router = createBrowserRouter([
   {
@@ -87,7 +90,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/productdetails/:id',
-        element: <ProductDetails></ProductDetails>,
+        element: <PrivateRoute><ProductDetails></ProductDetails></PrivateRoute>,
         loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/foodid/${params.id}`)
       }
     ],
@@ -102,14 +105,20 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
-      { path: "profile", element: <Profile></Profile> },
+      {
+        path: "profile", element: <PrivateRoute>
+          <Profile></Profile>
+        </PrivateRoute>
+      },
       {
         path: "calendar",
         element: <Calender></Calender>,
       },
       {
         path: "myaddedblogs",
-        element: <MyBlogs></MyBlogs>,
+        element: <PrivateRoute>
+          <MyBlogs></MyBlogs>
+        </PrivateRoute>,
       },
       {
         path: "addBlogs",
@@ -121,21 +130,35 @@ export const router = createBrowserRouter([
       },
       {
         path: "manageusers",
-        element: <ManageUsers></ManageUsers>,
+        element: <PrivateRoute>
+          <AdminRoute>
+            <ManageUsers></ManageUsers>
+          </AdminRoute>
+        </PrivateRoute>,
       },
       {
         path: "addfood",
-        element: <AddFood></AddFood>,
+        element: <PrivateRoute>
+          <SellerRoute><AddFood></AddFood></SellerRoute>
+        </PrivateRoute>,
       },
       {
         path: "myaddfood",
-        element: <MyaddFood></MyaddFood>,
+        element: <PrivateRoute>
+          <SellerRoute>
+            <MyaddFood></MyaddFood>
+          </SellerRoute>
+        </PrivateRoute>,
       },
       {
         path: 'mycart',
-        element: <MyCart></MyCart>
+        element: <PrivateRoute>
+          <FarmerRoute>
+          <MyCart></MyCart>
+          </FarmerRoute>
+        </PrivateRoute>
       }
-    
+
     ],
   },
 ]);

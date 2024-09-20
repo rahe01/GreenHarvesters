@@ -115,7 +115,7 @@ async function run() {
 
     // get all user
 
-    app.get("/users", async (req, res) => {
+    app.get("/users", verifyToken, async (req, res) => {
       try {
         const users = await userCollection.find().toArray();
         res.send(users);
@@ -166,7 +166,7 @@ async function run() {
     // **********************We offer related api ****************
 
     // get offer
-    app.get("/getoffer",  async (req, res) => {
+    app.get("/getoffer", async (req, res) => {
       try {
         const offers = await weofferCollection.find().toArray();
         res.send(offers);
@@ -306,7 +306,7 @@ async function run() {
 
     // get blogs by email address
 
-    app.get("/getblogbyuser/:email", async (req, res) => {
+    app.get("/getblogbyuser/:email", verifyToken, async (req, res) => {
       const email = req.params.email;
       try {
         const blogs = await blosCollection.find({ userEmail: email }).toArray();
@@ -423,7 +423,7 @@ async function run() {
     });
 
     // get food by email address
-    app.get("/food/user/:email", async (req, res) => {
+    app.get("/food/user/:email", verifyToken, async (req, res) => {
       const email = req.params.email;
       try {
         const food = await foodCollection.find({ userEmail: email }).toArray();
@@ -522,7 +522,8 @@ async function run() {
     // add to cart
 
     app.post("/cartadd", async (req, res) => {
-      const { foodName,quantity, totalPrice, userName, userEmail, foodImage } = req.body;
+      const { foodName, quantity, totalPrice, userName, userEmail, foodImage } =
+        req.body;
       try {
         const newCartItem = {
           foodName,
@@ -530,17 +531,15 @@ async function run() {
           foodImage,
           userName,
           userEmail,
-          quantity
+          quantity,
         };
 
         const result = await cartCollection.insertOne(newCartItem);
         if (result.acknowledged) {
-          res
-            .status(201)
-            .json({
-              message: "Cart item added successfully!",
-              cartItem: newCartItem,
-            });
+          res.status(201).json({
+            message: "Cart item added successfully!",
+            cartItem: newCartItem,
+          });
         } else {
           res
             .status(500)
@@ -554,16 +553,17 @@ async function run() {
       }
     });
 
-
     // get cart by email address
     app.get("/cartbymail/:email", async (req, res) => {
       const email = req.params.email;
       try {
-        const cartItems = await cartCollection.find({ userEmail: email }).toArray();
+        const cartItems = await cartCollection
+          .find({ userEmail: email })
+          .toArray();
         if (!cartItems.length) {
           res
-           .status(404)
-           .send({ message: "No cart items found for this user" });
+            .status(404)
+            .send({ message: "No cart items found for this user" });
         } else {
           res.send(cartItems);
         }
@@ -580,17 +580,6 @@ async function run() {
     });
 
     // update cart item quantity
- 
-
-
-
-
-
-
-
-
-
-
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
