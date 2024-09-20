@@ -72,7 +72,7 @@ const Nav = () => {
 
           {/* Dropdown menu */}
           <div
-            className={`absolute z-50 rounded-xl shadow-md w-[40vw] md:w-[10vw] bg-white overflow-hidden right-0 top-12 text-sm ${
+            className={`absolute z-50 rounded-xl shadow-md w-[40vw] md:w-[10vw] bg-white dark:bg-blue-gray-800 overflow-hidden right-0 top-12 text-sm ${
               isDropdownOpen ? "block" : "hidden"
             }`}
             id="user-dropdown"
