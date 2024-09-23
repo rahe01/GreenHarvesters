@@ -10,9 +10,8 @@ export function Banner() {
           {new Array(length).fill("").map((_, i) => (
             <span
               key={i}
-              className={`block h-1 cursor-pointer rounded-2xl transition-all ${
-                activeIndex === i ? "w-8 bg-white" : "w-4 bg-white/50"
-              }`}
+              className={`block h-1 cursor-pointer rounded-2xl transition-all ${activeIndex === i ? "w-8 bg-white" : "w-4 bg-white/50"
+                }`}
               onClick={() => setActiveIndex(i)}
             />
           ))}
@@ -22,7 +21,7 @@ export function Banner() {
       {/* Slide 1 */}
       <div className="relative h-full w-full">
         <img
-          src="../../../../public/banner1.jpg"
+          src=" https://iili.io/dsMqaN2.jpg"
           alt="Green Harvester 1"
           className="h-full w-full object-cover opacity-80"
         />
@@ -42,7 +41,7 @@ export function Banner() {
       {/* Slide 2 */}
       <div className="relative h-full w-full">
         <img
-          src="../../../../public/banner2.jpg"
+          src="https://iili.io/dsMfrjS.jpg"
           alt="Green Harvester 2"
           className="h-full w-full object-cover opacity-80"
         />
@@ -62,7 +61,7 @@ export function Banner() {
       {/* Slide 3 */}
       <div className="relative h-full w-full">
         <img
-          src="../../../../public/banner3.jpg"
+          src="https://iili.io/dsM3SyB.jpg"
           alt="Green Harvester 3"
           className="h-full w-full object-cover opacity-80"
         />
