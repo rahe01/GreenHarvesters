@@ -24,7 +24,7 @@ import AddFood from "../pages/Dashboard/Saller/Food/AddFood";
 import MyaddFood from "../pages/Dashboard/Saller/Food/MyaddFood";
 import ProductDetails from "../pages/Shop/ProductDetails";
 import MyCart from "../pages/Dashboard/User/Cart/MyCart";
-import AdminRoute from "./AdminRoute";
+
 import SellerRoute from "./SellerRoute";
 import FarmerRoute from "./FarmerRoute";
 
@@ -131,9 +131,9 @@ export const router = createBrowserRouter([
       {
         path: "manageusers",
         element: <PrivateRoute>
-          <AdminRoute>
+        
             <ManageUsers></ManageUsers>
-          </AdminRoute>
+        
         </PrivateRoute>,
       },
       {

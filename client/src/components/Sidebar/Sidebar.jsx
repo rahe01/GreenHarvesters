@@ -57,8 +57,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
           </li>
 
           {/* Manage Users */}
-         {role === "Admin" && (
+        
            <li>
+           <p className="text-green-300 underline">For testing purposes,  I public manage user{"'"}s route</p>
            <Link to="manageusers">
              <MenuItem
                label="Manage Users"
@@ -66,8 +67,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                icon={MdOutlineManageAccounts}
              />
            </Link>
+           
          </li>
-         )}
+         
 
      {role === "Seller" && (
       <>
